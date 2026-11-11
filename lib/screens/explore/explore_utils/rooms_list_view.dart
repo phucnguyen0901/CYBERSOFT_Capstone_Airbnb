@@ -70,7 +70,7 @@ class RoomsListView extends StatelessWidget {
                   '\$${room.giaTien} night',
                   style: const TextStyle(fontWeight: .bold, fontSize: 14),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 48),
               ],
             ),
           ),

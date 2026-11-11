@@ -45,11 +45,19 @@ class _ActivityListViewState extends State<ActivityListView> {
         .catchError((onError) {});
   }
 
+  String dateTime(String dtString) {
+    int y = DateTime.parse(dtString).year;
+    int m = DateTime.parse(dtString).month;
+    int d = DateTime.parse(dtString).day;
+    return '$d-$m-$y';
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
+      reverse: true,
       itemCount: rooms.length,
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {
@@ -97,15 +105,36 @@ class _ActivityListViewState extends State<ActivityListView> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                const Text(
-                  '1,699 kilometers',
-                  style: TextStyle(color: Colors.grey),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_month_outlined,
+                      color: Colors.grey,
+                      size: 18,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'From ${dateTime(reserveInfo.ngayDen)} to ${dateTime(reserveInfo.ngayDi)}',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
                 ),
-                const Text('Jul 2 - 7', style: TextStyle(color: Colors.grey)),
-                const SizedBox(height: 4),
-
-                const SizedBox(height: 32),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.people_outlined,
+                      color: Colors.grey,
+                      size: 18,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${reserveInfo.soLuongKhach.toString()} guest(s)',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 48),
               ],
             ),
           ),
