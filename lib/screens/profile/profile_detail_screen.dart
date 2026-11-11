@@ -1,3 +1,4 @@
+import 'package:airbnb_cybersoft/screens/profile/profile_utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -9,79 +10,6 @@ class ProfileDetailScreen extends StatefulWidget {
 }
 
 class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
-  void _showEditBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      useSafeArea: true,
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsetsGeometry.all(16),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(Icons.close),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: const Text(
-                        'Edit profile',
-                        style: TextStyle(fontWeight: .bold),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        decoration: .underline,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Divider(),
-              const SizedBox(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: CircleAvatar(backgroundColor: Colors.grey, radius: 80),
-                ),
-              ),
-              const SizedBox(height: 16),
-              ListTile(
-                title: Text('About me'),
-                trailing: TextButton(onPressed: () {}, child: Text('Add')),
-              ),
-              const Divider(),
-              ListTile(
-                title: Text('About me'),
-                trailing: TextButton(onPressed: () {}, child: Text('Add')),
-              ),
-              const Divider(),
-              ListTile(
-                title: Text('About me'),
-                trailing: TextButton(onPressed: () {}, child: Text('Add')),
-              ),
-              const Divider(),
-              ListTile(
-                title: Text('About me'),
-                trailing: TextButton(onPressed: () {}, child: Text('Add')),
-              ),
-              const Divider(),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,9 +23,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
               crossAxisAlignment: .start,
               children: [
                 _heading(),
-                const SizedBox(height: 32),
-                Divider(),
-                const SizedBox(height: 32),
+                const DividerWidget(),
                 normalSvgIcon(
                   assetName: 'assets/icons/detail_room_icon/Verification.svg',
                   color: const Color.fromARGB(255, 12, 101, 15),
@@ -212,6 +138,79 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         ),
       ],
       actionsPadding: EdgeInsets.only(right: 8),
+    );
+  }
+
+  void _showEditBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsetsGeometry.all(16),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.close),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: const Text(
+                        'Edit profile',
+                        style: TextStyle(fontWeight: .bold),
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        decoration: .underline,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(),
+              const SizedBox(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: CircleAvatar(backgroundColor: Colors.grey, radius: 80),
+                ),
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                title: Text('About me'),
+                trailing: TextButton(onPressed: () {}, child: Text('Add')),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text('About me'),
+                trailing: TextButton(onPressed: () {}, child: Text('Add')),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text('About me'),
+                trailing: TextButton(onPressed: () {}, child: Text('Add')),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text('About me'),
+                trailing: TextButton(onPressed: () {}, child: Text('Add')),
+              ),
+              const Divider(),
+            ],
+          ),
+        );
+      },
     );
   }
 }

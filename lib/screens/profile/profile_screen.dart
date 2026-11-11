@@ -1,46 +1,36 @@
-import 'package:airbnb_cybersoft/models/booking_model.dart';
-import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/rooms_by_location.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/profile/profile_utils/activity_list_view.dart';
+import 'package:airbnb_cybersoft/screens/profile/profile_utils/divider_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key, required this.maNguoiDung});
-  final int maNguoiDung;
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreen();
 }
 
 class _ProfileScreen extends State<ProfileScreen> {
-  List<DatPhongViewModel> history = [];
-  List<PhongViewModel> rooms = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void _getHistory() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: .start,
-          children: [
-            const SizedBox(height: 16),
-            _header(),
-            const SizedBox(height: 32, child: Divider()),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: const Text('Activity', style: TextStyle(fontSize: 24)),
-            ),
-            const SizedBox(height: 16),
-            Expanded(child: RoomsByLocation(maViTri: 1)),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
+              const SizedBox(height: 16),
+              _header(),
+              const DividerWidget(),
+              Padding(
+                padding: const EdgeInsetsGeometry.symmetric(horizontal: 16),
+                child: const Text('Activity', style: TextStyle(fontSize: 24)),
+              ),
+              const SizedBox(height: 16),
+              const ActivityListView(),
+            ],
+          ),
         ),
       ),
     );
@@ -48,10 +38,11 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   Widget _header() {
     return Padding(
-      padding: const EdgeInsetsGeometry.all(16),
+      padding: const EdgeInsetsGeometry.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: .start,
         children: [
+          const SizedBox(height: 16),
           CircleAvatar(
             radius: 35,
             backgroundImage: NetworkImage(
