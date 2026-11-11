@@ -120,7 +120,8 @@ class _SearchScreenState extends State<SearchScreen> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => RoomsByLocation(maViTri: item.id!),
+            builder: (context) =>
+                RoomsByLocation(maViTri: item.id!, diaChi: diaChi),
           ),
         );
       },

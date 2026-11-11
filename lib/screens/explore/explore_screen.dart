@@ -50,8 +50,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
       surfaceTintColor: Colors.transparent,
       centerTitle: true,
       title: GestureDetector(
-        onTap: () async {
-          await Navigator.of(
+        onTap: () {
+          Navigator.of(
             context,
           ).push(MaterialPageRoute(builder: (context) => const SearchScreen()));
         },
@@ -89,8 +89,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
         isScrollable: true,
         tabAlignment: TabAlignment.start,
         labelPadding: const EdgeInsets.symmetric(horizontal: 24),
-        indicatorColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.label,
+        indicatorColor: Colors.black,
         labelColor: Colors.black,
         labelStyle: const TextStyle(fontSize: 12),
         tabs: List.generate(tabBarItems.length, (index) {

@@ -1,5 +1,6 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
+import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -22,14 +23,24 @@ class _DetailScreenState extends State<DetailScreen> {
   SafeArea _topBar(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
         child: Row(
           children: [
-            _buildButton(context),
+            _buildButton(Icon(Icons.arrow_back_rounded), context),
             Expanded(child: SizedBox()),
-            _buildButton(context),
+            _buildButton(
+              normalSvgIcon(
+                assetName: 'assets/icons/detail_room_icon/Upload.svg',
+              ),
+              null,
+            ),
             SizedBox(width: 8),
-            _buildButton(context),
+            _buildButton(
+              normalSvgIcon(
+                assetName: 'assets/icons/detail_room_icon/Menu.svg',
+              ),
+              null,
+            ),
           ],
         ),
       ),
@@ -79,9 +90,18 @@ class _DetailScreenState extends State<DetailScreen> {
                 Row(
                   mainAxisAlignment: .spaceBetween,
                   children: [
-                    Text(
-                      '\$ ${widget.room.giaTien.toString()}',
-                      style: const TextStyle(fontWeight: .bold, fontSize: 16),
+                    Row(
+                      children: [
+                        const Icon(Icons.monetization_on_outlined),
+                        const SizedBox(width: 8),
+                        Text(
+                          '${widget.room.giaTien}\$ per. night ',
+                          style: const TextStyle(
+                            fontWeight: .bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
                     Container(
                       height: 40,
@@ -112,10 +132,16 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  IconButton _buildButton(BuildContext context) {
+  Widget _buildButton(Widget icon, BuildContext? context) {
     return IconButton(
-      onPressed: () => Navigator.of(context).pop(),
-      icon: const Icon(Icons.arrow_back, color: Colors.black),
+      onPressed: () {
+        if (context != null) {
+          Navigator.of(context).pop();
+        }
+      },
+      icon: icon,
+      iconSize: 32,
+      color: Colors.black,
       style: IconButton.styleFrom(backgroundColor: Colors.white),
     );
   }

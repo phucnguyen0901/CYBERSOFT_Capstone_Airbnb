@@ -3,6 +3,7 @@ import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/screens/explore/detail_screen.dart';
 import 'package:airbnb_cybersoft/services/reservation_service.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
+import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class ActivityListView extends StatefulWidget {
@@ -99,10 +100,6 @@ class _ActivityListViewState extends State<ActivityListView> {
                       ),
                     ),
                     const SizedBox(width: 32),
-                    Text(
-                      '\$${room.giaTien} night',
-                      style: const TextStyle(fontWeight: .bold, fontSize: 14),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -131,6 +128,24 @@ class _ActivityListViewState extends State<ActivityListView> {
                     Text(
                       '${reserveInfo.soLuongKhach.toString()} guest(s)',
                       style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.monetization_on_outlined,
+                      size: 18,
+                      color: primaryColor,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${room.giaTien}\$ per. night',
+                      style: const TextStyle(
+                        fontWeight: .bold,
+                        color: primaryColor,
+                      ),
                     ),
                   ],
                 ),
