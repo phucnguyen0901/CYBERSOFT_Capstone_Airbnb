@@ -64,7 +64,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       centerTitle: true,
       title: const TabBar(
-        // isScrollable: true,
         labelStyle: TextStyle(fontWeight: .bold, color: Colors.black),
         dividerColor: Colors.transparent,
         indicatorSize: .label,

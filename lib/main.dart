@@ -30,6 +30,11 @@ class _AirbnbAppState extends State<AirbnbApp> {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.googleSans().fontFamily,
+        textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 16)),
+        appBarTheme: AppBarThemeData(
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.white,
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
       ),
@@ -47,7 +52,6 @@ class _AirbnbAppState extends State<AirbnbApp> {
       elevation: 0,
       backgroundColor: Colors.white,
       selectedItemColor: primaryColor,
-      selectedFontSize: 12,
       currentIndex: _navIndex,
       items: List.generate(navBarItems.length, (index) {
         final navItem = navBarItems[index];

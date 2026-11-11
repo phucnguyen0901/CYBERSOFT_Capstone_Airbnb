@@ -1,6 +1,6 @@
 import 'package:airbnb_cybersoft/screens/profile/profile_detail_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_utils/activity_list_view.dart';
-import 'package:airbnb_cybersoft/screens/profile/profile_utils/divider_widget.dart';
+import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {

@@ -7,9 +7,9 @@ class DividerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 32),
+        const SizedBox(height: 24),
         const Divider(),
-        const SizedBox(height: 32),
+        const SizedBox(height: 24),
       ],
     );
   }

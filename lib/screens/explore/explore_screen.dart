@@ -92,7 +92,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
         indicatorSize: TabBarIndicatorSize.label,
         indicatorColor: Colors.black,
         labelColor: Colors.black,
-        labelStyle: const TextStyle(fontSize: 12),
         tabs: List.generate(tabBarItems.length, (index) {
           final tabBarItem = tabBarItems[index];
           return Tab(

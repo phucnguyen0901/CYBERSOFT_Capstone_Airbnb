@@ -96,7 +96,7 @@ class _ActivityListViewState extends State<ActivityListView> {
                     Expanded(
                       child: Text(
                         room.tenPhong,
-                        style: const TextStyle(fontWeight: .bold, fontSize: 14),
+                        style: const TextStyle(fontWeight: .bold),
                       ),
                     ),
                     const SizedBox(width: 32),
@@ -108,7 +108,7 @@ class _ActivityListViewState extends State<ActivityListView> {
                     const Icon(
                       Icons.calendar_month_outlined,
                       color: Colors.grey,
-                      size: 18,
+                      size: 20,
                     ),
                     const SizedBox(width: 8),
                     Text(
@@ -122,7 +122,7 @@ class _ActivityListViewState extends State<ActivityListView> {
                     const Icon(
                       Icons.people_outlined,
                       color: Colors.grey,
-                      size: 18,
+                      size: 20,
                     ),
                     const SizedBox(width: 8),
                     Text(
@@ -136,7 +136,7 @@ class _ActivityListViewState extends State<ActivityListView> {
                   children: [
                     const Icon(
                       Icons.monetization_on_outlined,
-                      size: 18,
+                      size: 20,
                       color: primaryColor,
                     ),
                     const SizedBox(width: 8),

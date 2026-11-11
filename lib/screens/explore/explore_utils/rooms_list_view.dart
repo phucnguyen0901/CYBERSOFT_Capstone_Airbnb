@@ -45,7 +45,7 @@ class RoomsListView extends StatelessWidget {
       children: [
         const Icon(
           Icons.monetization_on_outlined,
-          size: 18,
+          size: 20,
           color: primaryColor,
         ),
         const SizedBox(width: 8),
@@ -57,37 +57,14 @@ class RoomsListView extends StatelessWidget {
     );
   }
 
-  // Row _calendar() {
-  //   return Row(
-  //     children: [
-  //       const Icon(Icons.calendar_month_outlined, size: 18, color: Colors.grey),
-  //       const SizedBox(width: 8),
-  //       Text('Jul 2 - 7', style: const TextStyle(color: Colors.grey)),
-  //     ],
-  //   );
-  // }
-
-  // Row _distance() {
-  //   return Row(
-  //     children: [
-  //       const Icon(Icons.location_on_outlined, size: 18, color: Colors.grey),
-  //       const SizedBox(width: 8),
-  //       Text('1.699 kilometers', style: const TextStyle(color: Colors.grey)),
-  //     ],
-  //   );
-  // }
-
   Row _roomName(PhongViewModel room) {
     return Row(
       crossAxisAlignment: .start,
       children: [
         Expanded(
-          child: Text(
-            room.tenPhong,
-            style: const TextStyle(fontWeight: .bold, fontSize: 14),
-          ),
+          child: Text(room.tenPhong, style: const TextStyle(fontWeight: .bold)),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 32),
         Row(
           children: [
             const Icon(Icons.star, size: 14),

@@ -1,4 +1,4 @@
-import 'package:airbnb_cybersoft/screens/profile/profile_utils/divider_widget.dart';
+import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 

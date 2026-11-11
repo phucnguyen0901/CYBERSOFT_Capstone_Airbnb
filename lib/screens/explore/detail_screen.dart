@@ -1,7 +1,9 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.room});
@@ -15,8 +17,9 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      backgroundColor: Colors.white,
       body: Stack(children: [_mainBody(), _topBar(context)]),
+      bottomSheet: _bottomSheet(),
     );
   }
 
@@ -83,47 +86,37 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text('123 ABC street, DEF ward, GHI city'),
-                const SizedBox(height: 48, child: Divider(color: Colors.grey)),
-                Text(widget.room.moTa),
-                const SizedBox(height: 48, child: Divider(color: Colors.grey)),
-
-                Row(
-                  mainAxisAlignment: .spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.monetization_on_outlined),
-                        const SizedBox(width: 8),
-                        Text(
-                          '${widget.room.giaTien}\$ per. night ',
-                          style: const TextStyle(
-                            fontWeight: .bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 40,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: primaryColor,
+                const DividerWidget(),
+                Text(widget.room.moTa, style: TextStyle(fontSize: 16)),
+                const DividerWidget(),
+                _bedroom(),
+                const DividerWidget(),
+                SizedBox(
+                  child: Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      const Text(
+                        'What\'s this place offer',
+                        style: TextStyle(fontSize: 24, fontWeight: .bold),
                       ),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Reserve',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: .bold,
-                          ),
-                        ),
+                      const SizedBox(height: 16),
+                      Column(
+                        crossAxisAlignment: .start,
+                        children: [
+                          if (widget.room.mayGiat) _buildConvenient('mayGiat'),
+                          if (widget.room.banLa) _buildConvenient('banLa'),
+                          if (widget.room.bep) _buildConvenient('bep'),
+                          if (widget.room.doXe) _buildConvenient('doXe'),
+                          if (widget.room.dieuHoa) _buildConvenient('dieuHoa'),
+                          if (widget.room.tivi) _buildConvenient('tivi'),
+                          if (widget.room.wifi) _buildConvenient('wifi'),
+                          if (widget.room.hoBoi) _buildConvenient('hoBoi'),
+                        ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 80),
               ],
             ),
           ),
@@ -132,15 +125,113 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Widget _buildButton(Widget icon, BuildContext? context) {
+  Row _buildConvenient(String tag) {
+    Map<String, dynamic> convenience = {};
+    for (var item in roomConvenients) {
+      if (item['tag'] == tag) {
+        convenience = item;
+      }
+    }
+    return Row(
+      children: [
+        convenience['icon'],
+        const SizedBox(width: 16),
+        Text(convenience['label']),
+      ],
+    );
+  }
+
+  SizedBox _bedroom() {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: .start,
+        children: [
+          const Text(
+            'Where you\'ll sleep',
+            style: TextStyle(fontWeight: .bold, fontSize: 24),
+          ),
+          const SizedBox(height: 16),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                normalSvgIcon(
+                  assetName: 'assets/icons/detail_room_icon/Bed.svg',
+                ),
+                const SizedBox(height: 4),
+                const Text('Bedroom', style: TextStyle(fontWeight: .bold)),
+                Text('${widget.room.giuong.toString()} large bed(s)'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SafeArea _bottomSheet() {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: BottomSheet(
+          onClosing: () {},
+          builder: (context) {
+            return SizedBox(
+              child: Row(
+                mainAxisAlignment: .spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.monetization_on_outlined),
+                      const SizedBox(width: 8),
+                      Text(
+                        '${widget.room.giaTien}\$ per. night ',
+                        style: const TextStyle(fontWeight: .bold, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: primaryColor,
+                    ),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Reserve',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: .bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  IconButton _buildButton(Widget icon, BuildContext? context) {
     return IconButton(
+      padding: const EdgeInsets.all(4),
       onPressed: () {
         if (context != null) {
           Navigator.of(context).pop();
         }
       },
       icon: icon,
-      iconSize: 32,
       color: Colors.black,
       style: IconButton.styleFrom(backgroundColor: Colors.white),
     );
