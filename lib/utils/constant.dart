@@ -1,6 +1,8 @@
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
+const Color primaryColor = Color.fromARGB(255, 180, 13, 1);
+
 final List<Map<String, String>> navBarItems = const [
   {'label': 'Explore', 'icon': 'assets/icons/navbar_icon/Search.svg'},
   {'label': 'Wishlist', 'icon': 'assets/icons/navbar_icon/Heart.svg'},
@@ -17,53 +19,45 @@ final List<Map<String, String>> tabBarItems = const [
   {'label': 'Arctic', 'icon': 'assets/icons/detail_room_icon/Arctic.svg'},
 ];
 
-final List<Map<String, dynamic>> roomConvenients = [
+final List<Map<String, String>> roomConvenients = const [
   {
     'tag': 'mayGiat',
     'label': 'Washing machine',
-    'icon': normalSvgIcon(assetName: 'assets/icons/detail_room_icon/Door.svg'),
+    'icon': 'assets/icons/detail_room_icon/Door.svg',
   },
   {
     'tag': 'tivi',
-    'label': 'Lagre TV, easy to enjoy media',
-    'icon': normalSvgIcon(
-      assetName: 'assets/icons/detail_room_icon/river_view.svg',
-    ),
+    'label': 'Lagre TV, easy to enjoy multi-media',
+    'icon': 'assets/icons/detail_room_icon/river_view.svg',
   },
   {
     'tag': 'banLa',
     'label': 'Steam iron',
-    'icon': normalSvgIcon(assetName: 'assets/icons/detail_room_icon/Door.svg'),
-  },
-  {
-    'tag': 'wifi',
-    'label': 'Free wi-fi',
-    'icon': normalSvgIcon(assetName: 'assets/icons/detail_room_icon/Wifi.svg'),
+    'icon': 'assets/icons/detail_room_icon/Door.svg',
   },
   {
     'tag': 'dieuHoa',
     'label': 'Air conditioner',
-    'icon': normalSvgIcon(
-      assetName: 'assets/icons/detail_room_icon/Arctic.svg',
-    ),
+    'icon': 'assets/icons/detail_room_icon/Arctic.svg',
   },
   {
     'tag': 'bep',
     'label': 'Kitchen',
-    'icon': normalSvgIcon(
-      assetName: 'assets/icons/detail_room_icon/Kitchen.svg',
-    ),
+    'icon': 'assets/icons/detail_room_icon/Kitchen.svg',
+  },
+  {
+    'tag': 'wifi',
+    'label': 'Free wi-fi',
+    'icon': 'assets/icons/detail_room_icon/Wifi.svg',
   },
   {
     'tag': 'doXe',
     'label': 'Free parking on permises',
-    'icon': normalSvgIcon(assetName: 'assets/icons/detail_room_icon/Car.svg'),
+    'icon': 'assets/icons/detail_room_icon/Car.svg',
   },
   {
     'tag': 'hoBoi',
     'label': 'Free to use swim pool',
-    'icon': normalSvgIcon(assetName: 'assets/icons/category_icon/Pool.svg'),
+    'icon': 'assets/icons/category_icon/Pool.svg',
   },
 ];
-
-const Color primaryColor = Color.fromARGB(255, 180, 13, 1);

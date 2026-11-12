@@ -112,7 +112,7 @@ class _MapButton extends StatelessWidget {
         color: Colors.black,
         borderRadius: BorderRadius.circular(100),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       child: Row(
         mainAxisSize: .min,
         children: [
@@ -121,7 +121,7 @@ class _MapButton extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontWeight: .bold),
           ),
           const SizedBox(width: 8),
-          const Icon(Icons.map_outlined, color: Colors.white),
+          const Icon(Icons.map, color: Colors.white),
         ],
       ),
     );

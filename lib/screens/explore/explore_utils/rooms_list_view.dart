@@ -62,7 +62,12 @@ class RoomsListView extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         Expanded(
-          child: Text(room.tenPhong, style: const TextStyle(fontWeight: .bold)),
+          child: Text(
+            room.tenPhong,
+            style: const TextStyle(fontWeight: .bold),
+            maxLines: 2,
+            overflow: .ellipsis,
+          ),
         ),
         const SizedBox(width: 32),
         Row(

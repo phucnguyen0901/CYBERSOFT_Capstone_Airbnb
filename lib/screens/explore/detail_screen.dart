@@ -3,7 +3,6 @@ import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key, required this.room});
@@ -91,53 +90,14 @@ class _DetailScreenState extends State<DetailScreen> {
                 const DividerWidget(),
                 _bedroom(),
                 const DividerWidget(),
-                SizedBox(
-                  child: Column(
-                    crossAxisAlignment: .start,
-                    children: [
-                      const Text(
-                        'What\'s this place offer',
-                        style: TextStyle(fontSize: 24, fontWeight: .bold),
-                      ),
-                      const SizedBox(height: 16),
-                      Column(
-                        crossAxisAlignment: .start,
-                        children: [
-                          if (widget.room.mayGiat) _buildConvenient('mayGiat'),
-                          if (widget.room.banLa) _buildConvenient('banLa'),
-                          if (widget.room.bep) _buildConvenient('bep'),
-                          if (widget.room.doXe) _buildConvenient('doXe'),
-                          if (widget.room.dieuHoa) _buildConvenient('dieuHoa'),
-                          if (widget.room.tivi) _buildConvenient('tivi'),
-                          if (widget.room.wifi) _buildConvenient('wifi'),
-                          if (widget.room.hoBoi) _buildConvenient('hoBoi'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                _roomConveniences(),
+                const DividerWidget(),
                 const SizedBox(height: 80),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Row _buildConvenient(String tag) {
-    Map<String, dynamic> convenience = {};
-    for (var item in roomConvenients) {
-      if (item['tag'] == tag) {
-        convenience = item;
-      }
-    }
-    return Row(
-      children: [
-        convenience['icon'],
-        const SizedBox(width: 16),
-        Text(convenience['label']),
-      ],
     );
   }
 
@@ -154,6 +114,7 @@ class _DetailScreenState extends State<DetailScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
+              color: Colors.grey[100],
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -174,52 +135,99 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
+  SizedBox _roomConveniences() {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: .start,
+        children: [
+          const Text(
+            'What\'s this place offer',
+            style: TextStyle(fontSize: 24, fontWeight: .bold),
+          ),
+          const SizedBox(height: 16),
+          Column(
+            crossAxisAlignment: .start,
+            children: [
+              if (widget.room.mayGiat) _buildConvenient('mayGiat'),
+              if (widget.room.banLa) _buildConvenient('banLa'),
+              if (widget.room.dieuHoa) _buildConvenient('dieuHoa'),
+              if (widget.room.bep) _buildConvenient('bep'),
+              if (widget.room.tivi) _buildConvenient('tivi'),
+              if (widget.room.doXe) _buildConvenient('doXe'),
+              if (widget.room.wifi) _buildConvenient('wifi'),
+              if (widget.room.hoBoi) _buildConvenient('hoBoi'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   SafeArea _bottomSheet() {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: BottomSheet(
-          onClosing: () {},
-          builder: (context) {
-            return SizedBox(
-              child: Row(
-                mainAxisAlignment: .spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.monetization_on_outlined),
-                      const SizedBox(width: 8),
-                      Text(
-                        '${widget.room.giaTien}\$ per. night ',
-                        style: const TextStyle(fontWeight: .bold, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 50,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: primaryColor,
+      child: BottomSheet(
+        onClosing: () {},
+
+        backgroundColor: Colors.grey[100],
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsetsGeometry.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.monetization_on_outlined),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${widget.room.giaTien}\$ per. night ',
+                      style: const TextStyle(fontWeight: .bold, fontSize: 18),
                     ),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Reserve',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: .bold,
-                          fontSize: 16,
-                        ),
+                  ],
+                ),
+                Container(
+                  height: 50,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: primaryColor,
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Reserve',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: .bold,
+                        fontSize: 16,
                       ),
                     ),
                   ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
+    );
+  }
+
+  Row _buildConvenient(String tag) {
+    Map<String, dynamic> convenience = {};
+    for (var item in roomConvenients) {
+      if (item['tag'] == tag) {
+        convenience = item;
+      }
+    }
+    return Row(
+      children: [
+        normalSvgIcon(assetName: convenience['icon']),
+        const SizedBox(width: 16),
+        Text(convenience['label'], maxLines: 2, overflow: .ellipsis),
+      ],
     );
   }
 

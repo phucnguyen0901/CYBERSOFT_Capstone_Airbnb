@@ -97,6 +97,8 @@ class _ActivityListViewState extends State<ActivityListView> {
                       child: Text(
                         room.tenPhong,
                         style: const TextStyle(fontWeight: .bold),
+                        maxLines: 2,
+                        overflow: .ellipsis,
                       ),
                     ),
                     const SizedBox(width: 32),
