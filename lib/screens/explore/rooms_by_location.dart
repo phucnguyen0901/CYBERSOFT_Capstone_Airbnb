@@ -36,7 +36,6 @@ class _RoomsByLocation extends State<RoomsByLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -48,10 +47,8 @@ class _RoomsByLocation extends State<RoomsByLocation> {
   AppBar _appBar() {
     return AppBar(
       automaticallyImplyLeading: false,
-      toolbarHeight: 80,
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.transparent,
       centerTitle: true,
+      toolbarHeight: 80,
       title: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -70,6 +67,8 @@ class _RoomsByLocation extends State<RoomsByLocation> {
                 Text(
                   widget.diaChi,
                   style: const TextStyle(fontSize: 16, fontWeight: .bold),
+                  maxLines: 1,
+                  overflow: .ellipsis,
                 ),
               ],
             ),
@@ -78,7 +77,7 @@ class _RoomsByLocation extends State<RoomsByLocation> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.close_rounded),
+              icon: const Icon(Icons.close_rounded),
             ),
           ],
         ),

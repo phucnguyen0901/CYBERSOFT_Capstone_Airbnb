@@ -12,7 +12,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  var locationList = [];
+  List<ViTriViewModel> locationList = [];
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -51,7 +51,6 @@ class _SearchScreenState extends State<SearchScreen> {
     return AppBar(
       toolbarHeight: 80,
       backgroundColor: Colors.grey[300],
-      surfaceTintColor: Colors.transparent,
       leading: SizedBox(
         width: 48,
         child: Padding(
@@ -92,9 +91,9 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               filled: true,
               fillColor: Colors.grey[200],
-              prefixIcon: Icon(Icons.search_rounded),
-              hint: Text('Search here...'),
-              suffixIcon: Icon(Icons.close_rounded),
+              prefixIcon: const Icon(Icons.search_rounded),
+              hint: const Text('Search here...'),
+              suffixIcon: const Icon(Icons.close_rounded),
             ),
           ),
           const SizedBox(height: 16),
@@ -114,7 +113,8 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   InkWell _locationTile(ViTriViewModel item) {
-    String diaChi = '${item.tenViTri}, ${item.tinhThanh}, ${item.quocGia}';
+    final String diaChi =
+        '${item.tenViTri}, ${item.tinhThanh}, ${item.quocGia}';
     return InkWell(
       onTap: () {
         Navigator.of(context).push(

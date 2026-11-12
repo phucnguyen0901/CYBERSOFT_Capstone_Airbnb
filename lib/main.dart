@@ -35,6 +35,8 @@ class _AirbnbAppState extends State<AirbnbApp> {
           surfaceTintColor: Colors.transparent,
           backgroundColor: Colors.white,
         ),
+        iconTheme: IconThemeData(size: 20),
+        scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
       ),

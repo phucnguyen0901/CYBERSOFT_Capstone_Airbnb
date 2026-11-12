@@ -28,8 +28,6 @@ class RoomsListView extends StatelessWidget {
                 const SizedBox(height: 16),
                 _roomName(room),
                 const SizedBox(height: 8),
-                // _distance(),
-                // _calendar(),
                 _roomPrice(room),
                 const SizedBox(height: 48),
               ],
@@ -72,7 +70,7 @@ class RoomsListView extends StatelessWidget {
         const SizedBox(width: 32),
         Row(
           children: [
-            const Icon(Icons.star, size: 14),
+            const Icon(Icons.star, size: 20),
             const SizedBox(width: 4),
             const Text('4.87 (71)'),
           ],

@@ -35,7 +35,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return DefaultTabController(
       length: tabBarItems.length,
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: _appBar(),
         floatingActionButton: _MapButton(),
         body: RoomsListView(rooms: rooms),
@@ -46,8 +45,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
   AppBar _appBar() {
     return AppBar(
       toolbarHeight: 80,
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.transparent,
       centerTitle: true,
       title: GestureDetector(
         onTap: () {

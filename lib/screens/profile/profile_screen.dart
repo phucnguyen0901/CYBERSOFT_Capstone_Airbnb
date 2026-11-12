@@ -1,5 +1,6 @@
 import 'package:airbnb_cybersoft/screens/profile/profile_detail_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_utils/activity_list_view.dart';
+import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,6 @@ class _ProfileScreen extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -25,7 +25,10 @@ class _ProfileScreen extends State<ProfileScreen> {
               const DividerWidget(),
               Padding(
                 padding: const EdgeInsetsGeometry.symmetric(horizontal: 16),
-                child: const Text('Activity', style: TextStyle(fontSize: 24)),
+                child: const Text(
+                  'Activity',
+                  style: TextStyle(fontSize: titleFontSize),
+                ),
               ),
               const SizedBox(height: 16),
               const ActivityListView(),
@@ -52,7 +55,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                 Container(color: Colors.grey),
           ),
           const SizedBox(height: 16),
-          const Text('John', style: TextStyle(fontSize: 40, fontWeight: .bold)),
+          const Text(
+            'John',
+            style: TextStyle(fontSize: headerFontSized, fontWeight: .bold),
+          ),
           const SizedBox(height: 8),
           TextButton(
             child: const Text(

@@ -1,3 +1,4 @@
+import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,11 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                 const SizedBox(height: 16),
                 const Text(
                   'Identity verification',
-                  style: TextStyle(fontSize: 24, fontWeight: .bold),
+                  style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
                 ),
                 const SizedBox(height: 8),
                 const Text(
                   'Show others you\'re really you with the \nidentity verification badge',
-                  style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 16),
                 OutlinedButton(
@@ -47,28 +47,26 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                Divider(),
-
+                const Divider(),
                 Row(
                   crossAxisAlignment: .start,
                   children: [
-                    Icon(Icons.translate),
+                    const Icon(Icons.translate),
                     const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: .start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 8),
-                          child: Text(
+                          child: const Text(
                             'Some info is shown in it\'s original language.',
-                            style: TextStyle(fontSize: 14),
                             maxLines: 2,
                           ),
                         ),
 
                         TextButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             'Translate',
                             style: TextStyle(decoration: .underline),
                           ),
@@ -80,14 +78,14 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                 const SizedBox(height: 32),
                 const Text(
                   'Matt confirmed',
-                  style: TextStyle(fontSize: 32, fontWeight: .bold),
+                  style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
                 ),
                 const SizedBox(height: 16),
                 Row(
                   children: [
                     Icon(Icons.done),
                     const SizedBox(width: 16),
-                    const Text('Phone number', style: TextStyle(fontSize: 16)),
+                    const Text('Phone number'),
                   ],
                 ),
               ],
@@ -113,10 +111,10 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         const SizedBox(height: 16),
         const Text(
           'Hi, I\'m Dolly',
-          style: TextStyle(fontSize: 32, fontWeight: .bold),
+          style: TextStyle(fontSize: headerFontSized, fontWeight: .bold),
         ),
         const SizedBox(height: 8),
-        const Text('Joined in 2021', style: TextStyle(fontSize: 16)),
+        const Text('Joined in 2021'),
       ],
     );
   }
@@ -148,7 +146,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
       context: context,
       builder: (context) {
         return Padding(
-          padding: EdgeInsetsGeometry.all(16),
+          padding: const EdgeInsetsGeometry.all(16),
           child: Column(
             children: [
               Row(
@@ -157,11 +155,11 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Center(
-                      child: const Text(
+                      child: Text(
                         'Edit profile',
                         style: TextStyle(fontWeight: .bold),
                       ),
@@ -169,7 +167,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       'Save',
                       style: TextStyle(
                         decoration: .underline,
@@ -188,7 +186,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
               ),
               const SizedBox(height: 16),
               ListTile(
-                title: Text('About me'),
+                title: const Text('About me'),
                 trailing: TextButton(onPressed: () {}, child: Text('Add')),
               ),
               const Divider(),

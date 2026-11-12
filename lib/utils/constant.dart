@@ -1,7 +1,9 @@
-import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
 const Color primaryColor = Color.fromARGB(255, 180, 13, 1);
+
+const double headerFontSized = 40;
+const double titleFontSize = 24;
 
 final List<Map<String, String>> navBarItems = const [
   {'label': 'Explore', 'icon': 'assets/icons/navbar_icon/Search.svg'},

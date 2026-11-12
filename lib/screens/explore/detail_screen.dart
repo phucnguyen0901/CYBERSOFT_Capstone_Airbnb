@@ -29,7 +29,7 @@ class _DetailScreenState extends State<DetailScreen> {
         child: Row(
           children: [
             _buildButton(Icon(Icons.arrow_back_rounded), context),
-            Expanded(child: SizedBox()),
+            const Expanded(child: SizedBox()),
             _buildButton(
               normalSvgIcon(
                 assetName: 'assets/icons/detail_room_icon/Upload.svg',
@@ -71,22 +71,13 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Text(
-                  widget.room.tenPhong,
-                  style: const TextStyle(fontSize: 24, fontWeight: .bold),
-                ),
+                _roomName(),
                 const SizedBox(height: 16),
-                const Row(
-                  children: [
-                    Icon(Icons.star),
-                    Text('5.0 . '),
-                    Text('3 reviews'),
-                  ],
-                ),
+                _starRate(),
                 const SizedBox(height: 16),
                 Text('123 ABC street, DEF ward, GHI city'),
                 const DividerWidget(),
-                Text(widget.room.moTa, style: TextStyle(fontSize: 16)),
+                Text(widget.room.moTa),
                 const DividerWidget(),
                 _bedroom(),
                 const DividerWidget(),
@@ -101,6 +92,19 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
+  Text _roomName() {
+    return Text(
+      widget.room.tenPhong,
+      style: const TextStyle(fontSize: titleFontSize, fontWeight: .bold),
+    );
+  }
+
+  Row _starRate() {
+    return const Row(
+      children: [Icon(Icons.star_rounded), Text('5.0 . '), Text('3 reviews')],
+    );
+  }
+
   SizedBox _bedroom() {
     return SizedBox(
       child: Column(
@@ -108,7 +112,7 @@ class _DetailScreenState extends State<DetailScreen> {
         children: [
           const Text(
             'Where you\'ll sleep',
-            style: TextStyle(fontWeight: .bold, fontSize: 24),
+            style: TextStyle(fontWeight: .bold, fontSize: titleFontSize),
           ),
           const SizedBox(height: 16),
           Container(
@@ -142,7 +146,7 @@ class _DetailScreenState extends State<DetailScreen> {
         children: [
           const Text(
             'What\'s this place offer',
-            style: TextStyle(fontSize: 24, fontWeight: .bold),
+            style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
           ),
           const SizedBox(height: 16),
           Column(
@@ -199,11 +203,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     onPressed: () {},
                     child: const Text(
                       'Reserve',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: .bold,
-                        fontSize: 16,
-                      ),
+                      style: TextStyle(color: Colors.white, fontWeight: .bold),
                     ),
                   ),
                 ),
