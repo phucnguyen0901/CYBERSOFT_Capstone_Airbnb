@@ -18,7 +18,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   void initState() {
-    super.initState();
     RoomService.getRooms()
         .then((value) {
           setState(() {
@@ -28,6 +27,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
         .catchError((err) {
           throw Exception(err);
         });
+    super.initState();
   }
 
   @override
