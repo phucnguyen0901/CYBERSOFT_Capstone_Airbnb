@@ -12,12 +12,12 @@ class LocationService {
     final url = Uri.parse('$apiDomain/api/vi-tri');
 
     try {
-      final respone = await http.get(
+      final response = await http.get(
         url,
         headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
       );
-      if (respone.statusCode == 200) {
-        var resBody = jsonDecode(respone.body);
+      if (response.statusCode == 200) {
+        var resBody = jsonDecode(response.body);
         List content = resBody['content'];
         List<ViTriViewModel> result = content
             .map((item) => ViTriViewModel.fromMap(item))

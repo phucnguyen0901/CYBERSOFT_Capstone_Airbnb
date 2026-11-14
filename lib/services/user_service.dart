@@ -13,12 +13,12 @@ class UserService {
     final url = Uri.parse('$apiDomain/api/auth/signin');
 
     try {
-      final respone = await http.get(
+      final response = await http.get(
         url,
         headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
       );
-      if (respone.statusCode == 200) {
-        var resBody = jsonDecode(respone.body);
+      if (response.statusCode == 200) {
+        var resBody = jsonDecode(response.body);
         var content = resBody['content'];
         DangNhapView result = DangNhapView.fromMap(content);
         return result;
@@ -34,12 +34,12 @@ class UserService {
     final url = Uri.parse('$apiDomain/api/auth/signup');
 
     try {
-      final respone = await http.get(
+      final response = await http.get(
         url,
         headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
       );
-      if (respone.statusCode == 200) {
-        var resBody = jsonDecode(respone.body);
+      if (response.statusCode == 200) {
+        var resBody = jsonDecode(response.body);
         var content = resBody['content'];
         ThongTinNguoiDung result = ThongTinNguoiDung.fromMap(content);
         return result;

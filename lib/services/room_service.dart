@@ -12,12 +12,12 @@ class RoomService {
     final url = Uri.parse('$apiDomain/api/phong-thue');
 
     try {
-      final respone = await http.get(
+      final response = await http.get(
         url,
         headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
       );
-      if (respone.statusCode == 200) {
-        var resBody = jsonDecode(respone.body);
+      if (response.statusCode == 200) {
+        var resBody = jsonDecode(response.body);
         List content = resBody['content'];
         List<PhongViewModel> result = content
             .map((item) => PhongViewModel.fromMap(item))
@@ -35,12 +35,12 @@ class RoomService {
     final url = Uri.parse('$apiDomain/api/phong-thue/$id');
 
     try {
-      final respone = await http.get(
+      final response = await http.get(
         url,
         headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
       );
-      if (respone.statusCode == 200) {
-        var resBody = jsonDecode(respone.body);
+      if (response.statusCode == 200) {
+        var resBody = jsonDecode(response.body);
         var content = resBody['content'];
         return PhongViewModel.fromMap(content);
       } else {
