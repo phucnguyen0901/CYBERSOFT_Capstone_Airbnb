@@ -30,15 +30,17 @@ class _AirbnbAppState extends State<AirbnbApp> {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.googleSans().fontFamily,
-        textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 16)),
-        appBarTheme: AppBarThemeData(
+        textTheme: const TextTheme(bodyMedium: TextStyle(fontSize: 16)),
+        appBarTheme: const AppBarThemeData(
           surfaceTintColor: Colors.transparent,
           backgroundColor: Colors.white,
         ),
-        iconTheme: IconThemeData(size: 20),
+        iconTheme: const IconThemeData(size: 20),
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: Colors.white,
+        ),
       ),
       home: Scaffold(
         body: pageRoutes[_navIndex],
