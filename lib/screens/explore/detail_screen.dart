@@ -130,7 +130,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 4),
                 const Text('Bedroom', style: TextStyle(fontWeight: .bold)),
-                Text('${widget.room.giuong.toString()} large bed(s)'),
+                Text('${widget.room.giuong.toString()} standard bed(s)'),
               ],
             ),
           ),

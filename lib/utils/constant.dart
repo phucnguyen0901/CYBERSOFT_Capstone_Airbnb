@@ -8,7 +8,7 @@ const double titleFontSize = 24;
 final List<Map<String, String>> navBarItems = const [
   {'label': 'Explore', 'icon': 'assets/icons/navbar_icon/Search.svg'},
   {'label': 'Wishlist', 'icon': 'assets/icons/navbar_icon/Heart.svg'},
-  {'label': 'Trips', 'icon': 'assets/icons/navbar_icon/airbnb.svg'},
+  {'label': 'Trips', 'icon': 'assets/icons/navbar_icon/app_icon.svg'},
   {'label': 'Inbox', 'icon': 'assets/icons/navbar_icon/Message.svg'},
   {'label': 'Profile', 'icon': 'assets/icons/navbar_icon/User.svg'},
 ];

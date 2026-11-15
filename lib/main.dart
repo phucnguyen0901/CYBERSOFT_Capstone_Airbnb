@@ -3,6 +3,7 @@ import 'package:airbnb_cybersoft/screens/explore/explore_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/register_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
+import 'package:airbnb_cybersoft/utils/secure_storage.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,9 +14,21 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
+  var authProvider = AuthProvider();
+  // var userProvider = UserProvider();
+
+  final token = await getAccessToken();
+  // final user = await getUserInfo();
+
+  if (token != null) {
+    authProvider.setLogin(token);
+    // userProvider.loadComplete(user);
+    debugPrint('AuthProvider: Login successfully');
+  }
+
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => AuthProvider())],
+      providers: [ChangeNotifierProvider.value(value: authProvider)],
       child: const AirbnbApp(),
     ),
   );
@@ -33,7 +46,7 @@ class _AirbnbAppState extends State<AirbnbApp> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context, listen: true);
     final pageRoutes = [
       ExploreScreen(),
       null,
