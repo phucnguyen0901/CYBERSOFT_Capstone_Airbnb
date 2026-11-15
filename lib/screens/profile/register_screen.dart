@@ -1,4 +1,3 @@
-import 'package:airbnb_cybersoft/models/user_model.dart';
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/services/auth_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
@@ -34,9 +33,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
       final token = result.content.token;
       final userData = result.content.user;
-
-      debugPrint('Token: $token');
-      debugPrint('User: ${userData.name}');
 
       await saveUserInfo(token: token, user: userData);
 
