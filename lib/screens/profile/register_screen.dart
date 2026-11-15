@@ -1,4 +1,5 @@
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
+import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/services/auth_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/secure_storage.dart';
@@ -24,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> hanleSignin() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     authProvider.setLoading(true);
 
     try {
@@ -37,6 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await saveUserInfo(token: token, user: userData);
 
       authProvider.setLoading(false);
+      userProvider.loadUser(userData);
       authProvider.setLogin(token);
     } catch (error) {
       authProvider.setLoading(false);

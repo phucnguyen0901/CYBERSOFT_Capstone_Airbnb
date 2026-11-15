@@ -1,4 +1,3 @@
-import 'package:airbnb_cybersoft/models/login_model.dart';
 import 'package:airbnb_cybersoft/models/user_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -9,8 +8,8 @@ final apiDomain = dotenv.env['API_DOMAIN_URL'];
 final token = dotenv.env['CYBERSOFT_TOKEN'] ?? '';
 
 class UserService {
-  static Future<DangNhapView> login() async {
-    final url = Uri.parse('$apiDomain/api/auth/signin');
+  static Future<UserResponse> getUserInfoByID(int id) async {
+    final url = Uri.parse('$apiDomain/api/users/$id');
 
     try {
       final response = await http.get(
@@ -19,8 +18,7 @@ class UserService {
       );
       if (response.statusCode == 200) {
         var resBody = jsonDecode(response.body);
-        var content = resBody['content'];
-        DangNhapView result = DangNhapView.fromMap(content);
+        UserResponse result = UserResponse.fromMap(resBody);
         return result;
       } else {
         throw Exception('Error');

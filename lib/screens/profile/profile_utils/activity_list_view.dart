@@ -1,10 +1,12 @@
 import 'package:airbnb_cybersoft/models/booking_model.dart';
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/explore/detail_screen.dart';
 import 'package:airbnb_cybersoft/services/reservation_service.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ActivityListView extends StatefulWidget {
   const ActivityListView({super.key});
@@ -19,11 +21,13 @@ class _ActivityListViewState extends State<ActivityListView> {
 
   @override
   void initState() {
-    _getHistory(73395);
+    _getHistory();
     super.initState();
   }
 
-  void _getHistory(int maNguoiDung) {
+  void _getHistory() {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final maNguoiDung = userProvider.user.id!;
     ReservationService.getRoomsByUserID(maNguoiDung)
         .then((values) {
           setState(() {

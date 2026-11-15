@@ -1,4 +1,5 @@
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
+import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/explore/explore_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/register_screen.dart';
@@ -15,20 +16,24 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
 
   var authProvider = AuthProvider();
-  // var userProvider = UserProvider();
+  var userProvider = UserProvider();
 
   final token = await getAccessToken();
-  // final user = await getUserInfo();
+  final user = await getUserInfo();
 
-  if (token != null) {
+  if (token != null && user != null) {
     authProvider.setLogin(token);
-    // userProvider.loadComplete(user);
     debugPrint('AuthProvider: Login successfully');
+    userProvider.loadUser(user);
+    debugPrint('User Provider: Load user info successfully');
   }
 
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: authProvider)],
+      providers: [
+        ChangeNotifierProvider.value(value: authProvider),
+        ChangeNotifierProvider.value(value: userProvider),
+      ],
       child: const AirbnbApp(),
     ),
   );

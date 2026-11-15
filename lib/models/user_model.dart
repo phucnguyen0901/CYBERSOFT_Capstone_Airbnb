@@ -45,3 +45,23 @@ class ThongTinNguoiDung {
     );
   }
 }
+
+class UserResponse {
+  int statusCode;
+  ThongTinNguoiDung user;
+  String dateTime;
+
+  UserResponse({
+    required this.statusCode,
+    required this.user,
+    required this.dateTime,
+  });
+
+  factory UserResponse.fromMap(Map<String, dynamic> map) {
+    return UserResponse(
+      statusCode: map['statusCode'],
+      user: ThongTinNguoiDung.fromMap(map['content']),
+      dateTime: map['dateTime'],
+    );
+  }
+}

@@ -4,8 +4,8 @@ import 'package:airbnb_cybersoft/models/user_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final storage = FlutterSecureStorage();
-final _keyUserInfo = 'user_info';
-final _keyAccessToken = 'access_token';
+const _keyUserInfo = 'user_info';
+const _keyAccessToken = 'access_token';
 
 Future<void> saveUserInfo({
   required String token,
