@@ -1,6 +1,6 @@
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_detail_screen.dart';
-import 'package:airbnb_cybersoft/screens/profile/profile_utils/activity_list_view.dart';
+import 'package:airbnb_cybersoft/screens/profile/profile_widgets/activity_list_view.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +16,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreen extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: true);
+    final userProvider = context.watch<UserProvider>();
     final userName = userProvider.user.name;
     final userID = userProvider.user.id!;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

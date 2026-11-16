@@ -1,5 +1,5 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_utils/rooms_list_view.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_widgets/rooms_list_view.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:flutter/material.dart';
 

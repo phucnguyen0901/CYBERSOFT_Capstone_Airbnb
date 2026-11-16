@@ -51,7 +51,7 @@ class _AirbnbAppState extends State<AirbnbApp> {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context, listen: true);
+    final authProvider = context.watch<AuthProvider>();
     final pageRoutes = [
       ExploreScreen(),
       null,

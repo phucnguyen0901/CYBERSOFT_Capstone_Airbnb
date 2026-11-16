@@ -26,7 +26,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   }
 
   void _fetchUser() async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = context.read<UserProvider>();
     await UserService.getUserInfoByID(userProvider.user.id!)
         .then((result) {
           setState(() {
@@ -38,8 +38,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   }
 
   void _logout() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final authProvider = context.read<AuthProvider>();
+    final userProvider = context.read<UserProvider>();
     await clearStorage();
     authProvider.setLogout();
     userProvider.clearUser();
@@ -49,7 +49,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return (user == null)
-        ? Center()
+        ? Center(child: CircularProgressIndicator())
         : Scaffold(
             backgroundColor: Colors.white,
             appBar: _appBar(),

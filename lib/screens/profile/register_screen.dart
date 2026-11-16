@@ -1,86 +1,14 @@
+// import 'package:airbnb_cybersoft/models/login_model.dart';
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/services/auth_service.dart';
+import 'package:airbnb_cybersoft/screens/profile/register_widgets/auth_bottom_sheet.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
-import 'package:airbnb_cybersoft/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
-
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _userNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _cfPasswordController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-
-  String token = '';
-
-  Future<void> hanleSignin() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    authProvider.setLoading(true);
-
-    try {
-      final result = await AuthService.signin(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      final token = result.content.token;
-      final userData = result.content.user;
-
-      await saveUserInfo(token: token, user: userData);
-
-      authProvider.setLoading(false);
-      userProvider.loadUser(userData);
-      authProvider.setLogin(token);
-    } catch (error) {
-      authProvider.setLoading(false);
-      throw Exception('Error when signin: $error');
-    }
-  }
-
-  Future<void> handleSignup() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    var signupData = {
-      'name': _userNameController.text.trim(),
-      'email': _emailController.text.trim(),
-      'password': _passwordController.text.trim(),
-      'phone': _phoneController.text.trim(),
-    };
-    authProvider.setLoading(true);
-
-    try {
-      final success = await AuthService.signup(signupData);
-      if (success) {
-        debugPrint('Signup successful');
-        await hanleSignin();
-      } else {
-        debugPrint('Signup failed');
-      }
-      authProvider.setLoading(false);
-    } catch (error) {
-      authProvider.setLoading(false);
-      throw Exception('Error when signup: $error');
-    }
-  }
-
-  @override
-  void dispose() {
-    _userNameController.dispose();
-    _phoneController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _cfPasswordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 48),
                     InkWell(
                       onTap: () {
-                        _bottomSheetModal(context, isSignin: true);
+                        _bottomSheetModal(context, AuthMode.signIn);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -162,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 8),
                     InkWell(
                       onTap: () {
-                        _bottomSheetModal(context, isSignin: false);
+                        _bottomSheetModal(context, AuthMode.signUp);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -193,139 +121,61 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void _bottomSheetModal(BuildContext context, {required bool isSignin}) {
-    showModalBottomSheet(
+  void _bottomSheetModal(BuildContext context, AuthMode mode) {
+    showModalBottomSheet<void>(
       useSafeArea: true,
       isScrollControlled: true,
       context: context,
-      builder: (context) {
+      builder: (sheetContext) {
         return Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              _bottomSheetHeader(isSignin: isSignin),
-              const SizedBox(height: 48, child: Divider()),
-              Column(
-                spacing: 16,
-                children: [
-                  if (!isSignin) _userNameTextField(),
-                  if (!isSignin) _phoneTextField(),
-                  _emailTexField(),
-                  _passwordTextField(),
-                  if (!isSignin) _confirmPassword(),
-                ],
-              ),
-              const SizedBox(height: 48),
-              _sendReqButton(isSignin: isSignin),
-            ],
+          child: AuthBottomSheet(
+            mode: mode,
+            onSubmit: (data) {
+              return _handleAuth(context, data);
+            },
           ),
         );
       },
     );
   }
 
-  Row _bottomSheetHeader({required bool isSignin}) {
-    String label = (isSignin) ? 'Sign in' : 'Sign up';
-    return Row(
-      children: [
-        const SizedBox(width: 40),
-        Expanded(
-          child: Center(
-            child: Text(label, style: const TextStyle(fontSize: titleFontSize)),
-          ),
-        ),
-        SizedBox(
-          width: 40,
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.close_rounded),
-          ),
-        ),
-      ],
-    );
-  }
+  Future<void> _handleAuth(BuildContext context, AuthFormData data) async {
+    final authProvider = context.read<AuthProvider>();
+    final userProvider = context.read<UserProvider>();
 
-  TextField _userNameTextField() {
-    return TextField(
-      controller: _userNameController,
-      decoration: InputDecoration(
-        labelText: 'Your name',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    );
-  }
+    // late AuthContent session;
+    // var inputMode = data.mode;
 
-  TextField _phoneTextField() {
-    return TextField(
-      controller: _phoneController,
-      decoration: InputDecoration(
-        labelText: 'Phone number',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    );
-  }
+    // switch (inputMode) {
+    //   case AuthMode.signIn:
+    //     session = await authProvider.signIn(
+    //       email: data.email,
+    //       password: data.password,
+    //     );
+    //   case AuthMode.signUp:
+    //     session = await authProvider.signUp(
+    //       name: data.name,
+    //       email: data.email,
+    //       password: data.password,
+    //       phone: data.phone,
+    //     );
+    // }
 
-  TextField _emailTexField() {
-    return TextField(
-      controller: _emailController,
-      decoration: InputDecoration(
-        labelText: 'Email',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+    final session = switch (data.mode) {
+      AuthMode.signIn => await authProvider.signIn(
+        email: data.email,
+        password: data.password,
       ),
-    );
-  }
+      AuthMode.signUp => await authProvider.signUp(
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+      ),
+    };
 
-  TextField _passwordTextField() {
-    return TextField(
-      controller: _passwordController,
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Password',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    );
-  }
-
-  TextFormField _confirmPassword() {
-    return TextFormField(
-      controller: _cfPasswordController,
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Confirm password',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    );
-  }
-
-  InkWell _sendReqButton({required bool isSignin}) {
-    return InkWell(
-      onTap: () {
-        if (isSignin) {
-          hanleSignin();
-        } else {
-          handleSignup();
-        }
-        Navigator.of(context).pop();
-      },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: primaryColor),
-          color: primaryColor,
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Center(
-          child: const Text(
-            'Continue',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: .bold,
-            ),
-          ),
-        ),
-      ),
-    );
+    userProvider.loadUser(session.user);
+    authProvider.setLogin(session.token);
   }
 }
