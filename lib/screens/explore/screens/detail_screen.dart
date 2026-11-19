@@ -63,6 +63,7 @@ class DetailScreen extends StatelessWidget {
                 const DividerWidget(),
                 ReviewContainer(),
                 const DividerWidget(),
+                _notice(),
                 const SizedBox(height: 80),
               ],
             ),
@@ -116,6 +117,24 @@ class DetailScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Row _notice() {
+    return Row(
+      children: [
+        Expanded(
+          child: const Text(
+            'To protect your payment, never transfer money or communicate outside of the Airbnb Cybersoft website or app.',
+            style: TextStyle(fontSize: 14),
+          ),
+        ),
+        const SizedBox(width: 24),
+        normalSvgIcon(
+          assetName: 'assets/icons/detail_room_icon/Airbnb-Protect.svg',
+          color: Colors.red,
+        ),
+      ],
     );
   }
 }

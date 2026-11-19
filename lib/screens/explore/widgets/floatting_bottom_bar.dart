@@ -1,4 +1,5 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/screens/reservation/screens/reservation_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -33,17 +34,21 @@ class BottomBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 32,
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ReservationScreen(room: room),
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: primaryColor,
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 48,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: primaryColor,
+                    ),
                     child: const Text(
                       'Reserve',
                       style: TextStyle(

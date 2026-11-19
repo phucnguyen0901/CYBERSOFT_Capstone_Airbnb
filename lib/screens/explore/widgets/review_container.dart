@@ -30,7 +30,7 @@ class _ReviewContainerState extends State<ReviewContainer> {
       onTap: () {},
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 12),
+        padding: EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: Colors.grey[100],
           border: Border.all(color: Colors.grey),
@@ -43,18 +43,18 @@ class _ReviewContainerState extends State<ReviewContainer> {
     );
   }
 
-  AspectRatio _mainContainer() {
-    return AspectRatio(
-      aspectRatio: 4 / 3,
+  Widget _mainContainer() {
+    return SizedBox(
+      height: 260,
       child: ListView.builder(
         itemCount: 8,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: 16),
             child: Container(
               width: 340,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(16),
