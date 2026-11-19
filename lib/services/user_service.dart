@@ -28,18 +28,21 @@ class UserService {
     }
   }
 
-  static Future<ThongTinNguoiDung> signup() async {
-    final url = Uri.parse('$apiDomain/api/auth/signup');
+  static Future<UserResponse> updateUser(
+    int id,
+    Map<String, dynamic> updateData,
+  ) async {
+    final url = Uri.parse('$apiDomain/api/users/$id');
 
     try {
-      final response = await http.get(
+      final response = await http.put(
         url,
         headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
+        body: jsonEncode(updateData),
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         var resBody = jsonDecode(response.body);
-        var content = resBody['content'];
-        ThongTinNguoiDung result = ThongTinNguoiDung.fromMap(content);
+        UserResponse result = UserResponse.fromMap(resBody);
         return result;
       } else {
         throw Exception('Error');
@@ -49,17 +52,3 @@ class UserService {
     }
   }
 }
-
-/* model mẫu
-"content": {
-    "id": 73395,
-    "name": "NPN",
-    "email": "npntest@email.com",
-    "password": "",
-    "phone": "string",
-    "birthday": "string",
-    "avatar": "",
-    "gender": true,
-    "role": "USER"
-  },
-*/

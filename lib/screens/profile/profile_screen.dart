@@ -17,8 +17,8 @@ class _ProfileScreen extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    final userName = userProvider.user.name;
-    final userID = userProvider.user.id!;
+    var userName = userProvider.user.name;
+    var userID = userProvider.user.id!;
 
     return Scaffold(
       body: SafeArea(

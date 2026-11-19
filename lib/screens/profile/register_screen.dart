@@ -144,24 +144,6 @@ class RegisterScreen extends StatelessWidget {
     final authProvider = context.read<AuthProvider>();
     final userProvider = context.read<UserProvider>();
 
-    // late AuthContent session;
-    // var inputMode = data.mode;
-
-    // switch (inputMode) {
-    //   case AuthMode.signIn:
-    //     session = await authProvider.signIn(
-    //       email: data.email,
-    //       password: data.password,
-    //     );
-    //   case AuthMode.signUp:
-    //     session = await authProvider.signUp(
-    //       name: data.name,
-    //       email: data.email,
-    //       password: data.password,
-    //       phone: data.phone,
-    //     );
-    // }
-
     final session = switch (data.mode) {
       AuthMode.signIn => await authProvider.signIn(
         email: data.email,

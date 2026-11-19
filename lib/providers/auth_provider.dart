@@ -70,7 +70,8 @@ class AuthProvider extends ChangeNotifier {
     required String password,
   }) async {
     final result = await AuthService.signin(email: email, password: password);
-    await saveUserInfo(token: result.content.token, user: result.content.user);
+    await saveAccessToken(token: result.content.token);
+    await saveUserInfo(user: result.content.user);
     return result.content;
   }
 }

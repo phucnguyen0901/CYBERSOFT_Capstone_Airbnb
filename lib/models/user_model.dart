@@ -5,6 +5,7 @@ class ThongTinNguoiDung {
   String password;
   String phone;
   String birthday;
+  String? avatar;
   bool gender;
   String role;
 
@@ -15,6 +16,7 @@ class ThongTinNguoiDung {
     required this.password,
     required this.phone,
     required this.birthday,
+    required this.avatar,
     required this.gender,
     required this.role,
   });
@@ -27,6 +29,7 @@ class ThongTinNguoiDung {
       'password': password,
       'phone': phone,
       'birthday': birthday,
+      // 'avatar': avatar,
       'gender': gender,
       'role': role,
     };
@@ -40,6 +43,7 @@ class ThongTinNguoiDung {
       password: map['password'] as String,
       phone: map['phone'] as String,
       birthday: map['birthday'] as String,
+      avatar: map['avatar'] as String?,
       gender: map['gender'] as bool,
       role: map['role'] as String,
     );

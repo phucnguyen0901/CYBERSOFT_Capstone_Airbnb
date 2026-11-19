@@ -26,6 +26,7 @@ Future<void> main() async {
     debugPrint('AuthProvider: Login successfully');
     userProvider.loadUser(user);
     debugPrint('User Provider: Load user info successfully');
+    debugPrint('id: ${user.id}');
   }
 
   runApp(

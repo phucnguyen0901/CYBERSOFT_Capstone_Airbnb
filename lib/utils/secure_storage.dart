@@ -7,12 +7,11 @@ final storage = FlutterSecureStorage();
 const _keyUserInfo = 'user_info';
 const _keyAccessToken = 'access_token';
 
-Future<void> saveUserInfo({
-  required String token,
-  required ThongTinNguoiDung user,
-}) async {
+Future<void> saveAccessToken({required String token}) async {
   await storage.write(key: _keyAccessToken, value: token);
+}
 
+Future<void> saveUserInfo({required ThongTinNguoiDung user}) async {
   String userString = jsonEncode(user.toMap());
   await storage.write(key: _keyUserInfo, value: userString);
 }
@@ -29,6 +28,10 @@ Future<ThongTinNguoiDung?> getUserInfo() async {
   return null;
 }
 
-Future<void> clearStorage() async {
-  await storage.deleteAll();
+Future<void> clearToken() async {
+  await storage.delete(key: _keyAccessToken);
+}
+
+Future<void> clearUserInfo() async {
+  await storage.delete(key: _keyUserInfo);
 }
