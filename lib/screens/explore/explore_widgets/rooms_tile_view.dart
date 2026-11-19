@@ -2,7 +2,6 @@ import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/screens/explore/explore_screens/detail_screen.dart';
 import 'package:airbnb_cybersoft/screens/explore/explore_widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
-import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:flutter/material.dart';
 
 class RoomsTileView extends StatelessWidget {
@@ -27,7 +26,7 @@ class RoomsTileView extends StatelessWidget {
             RoomLocation(room: room),
             const SizedBox(height: 8),
             _roomPrice(room),
-            DividerWidget(),
+            const SizedBox(height: 48),
           ],
         ),
       ),

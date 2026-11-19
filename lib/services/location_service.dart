@@ -8,8 +8,8 @@ final apiDomain = dotenv.env['API_DOMAIN_URL'];
 final token = dotenv.env['CYBERSOFT_TOKEN'] ?? '';
 
 class LocationService {
-  static Future<List<ViTriViewModel>> getLocations() async {
-    final url = Uri.parse('$apiDomain/api/vi-tri');
+  static Future<List<ViTriViewModel>> getLocations(String keyword) async {
+    final url = Uri.parse('$apiDomain/api/vi-tri?keyword=$keyword');
 
     try {
       final response = await http.get(

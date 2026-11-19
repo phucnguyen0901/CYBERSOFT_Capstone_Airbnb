@@ -70,6 +70,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           ),
           const SizedBox(height: 8),
           TextButton(
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
             child: const Text(
               'View profile',
               style: TextStyle(

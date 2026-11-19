@@ -17,7 +17,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    LocationService.getLocations()
+    _getLocation('');
+    super.initState();
+  }
+
+  void _getLocation(String keyword) {
+    LocationService.getLocations(keyword)
         .then((value) {
           setState(() {
             locationList = value;
@@ -26,7 +31,6 @@ class _SearchScreenState extends State<SearchScreen> {
         .catchError((err) {
           throw Exception(err);
         });
-    super.initState();
   }
 
   @override
@@ -95,6 +99,9 @@ class _SearchScreenState extends State<SearchScreen> {
               hint: const Text('Search here...'),
               suffixIcon: const Icon(Icons.close_rounded),
             ),
+            onChanged: (value) {
+              _getLocation(value);
+            },
           ),
           const SizedBox(height: 16),
           Expanded(
@@ -144,7 +151,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       )
                     : ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(16),
+                        borderRadius: BorderRadius.circular(16),
                         child: Image.network(item.hinhAnh, fit: .cover),
                       ),
               ),
