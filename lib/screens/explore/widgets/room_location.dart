@@ -3,8 +3,9 @@ import 'package:airbnb_cybersoft/services/location_service.dart';
 import 'package:flutter/material.dart';
 
 class RoomLocation extends StatefulWidget {
-  const RoomLocation({super.key, required this.room});
+  const RoomLocation({super.key, required this.room, this.color});
   final PhongViewModel room;
+  final Color? color;
 
   @override
   State<RoomLocation> createState() => _RoomLocationState();
@@ -32,11 +33,12 @@ class _RoomLocationState extends State<RoomLocation> {
 
   @override
   Widget build(BuildContext context) {
+    Color color = (widget.color) ?? Colors.black;
     return Row(
       children: [
-        const Icon(Icons.location_on_outlined),
+        Icon(Icons.location_on_outlined, color: color),
         const SizedBox(width: 8),
-        Text(location),
+        Text(location, style: TextStyle(color: color)),
       ],
     );
   }

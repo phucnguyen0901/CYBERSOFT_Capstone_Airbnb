@@ -1,6 +1,6 @@
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_screens/explore_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/screens/explore_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_screens/profile_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_screens/register_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';

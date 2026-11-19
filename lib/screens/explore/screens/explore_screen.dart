@@ -1,8 +1,8 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_screens/search_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/screens/search_screen.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_widgets/rooms_tile_view.dart';
+import 'package:airbnb_cybersoft/screens/explore/widgets/rooms_tile_view.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -110,23 +110,26 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
 class _MapButton extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(100),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      child: Row(
-        mainAxisSize: .min,
-        children: [
-          const Text(
-            'Map',
-            style: TextStyle(color: Colors.white, fontWeight: .bold),
-          ),
-          const SizedBox(width: 8),
-          const Icon(Icons.map, color: Colors.white),
-        ],
+  InkWell build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Row(
+          mainAxisSize: .min,
+          children: [
+            const Text(
+              'Map',
+              style: TextStyle(color: Colors.white, fontWeight: .bold),
+            ),
+            const SizedBox(width: 8),
+            const Icon(Icons.map, color: Colors.white),
+          ],
+        ),
       ),
     );
   }

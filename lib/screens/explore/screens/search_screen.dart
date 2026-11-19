@@ -1,5 +1,5 @@
 import 'package:airbnb_cybersoft/models/location_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_screens/rooms_by_location.dart';
+import 'package:airbnb_cybersoft/screens/explore/screens/rooms_by_location.dart';
 import 'package:airbnb_cybersoft/services/location_service.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:airbnb_cybersoft/models/booking_model.dart';
 import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_screens/detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/screens/detail_screen.dart';
 import 'package:airbnb_cybersoft/services/reservation_service.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
@@ -123,6 +123,7 @@ class _ActivityListViewState extends State<ActivityListView> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 4),
                 Row(
                   children: [
                     const Icon(
@@ -137,7 +138,7 @@ class _ActivityListViewState extends State<ActivityListView> {
                     ),
                   ],
                 ),
-
+                const SizedBox(height: 4),
                 Row(
                   children: [
                     const Icon(
