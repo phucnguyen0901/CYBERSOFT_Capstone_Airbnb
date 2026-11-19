@@ -1,40 +1,36 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screens/detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
+import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:flutter/material.dart';
 
-class RoomsListView extends StatelessWidget {
-  const RoomsListView({super.key, required this.rooms});
-
-  final List<PhongViewModel> rooms;
+class RoomsTileView extends StatelessWidget {
+  const RoomsTileView({super.key, required this.room});
+  final PhongViewModel room;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: rooms.length,
-      padding: const EdgeInsets.all(16),
-      itemBuilder: (context, index) {
-        var room = rooms[index];
-        return GestureDetector(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => DetailScreen(room: room)),
-          ),
-          child: SizedBox(
-            child: Column(
-              mainAxisSize: .min,
-              crossAxisAlignment: .start,
-              children: [
-                _roomImages(room),
-                const SizedBox(height: 16),
-                _roomName(room),
-                const SizedBox(height: 8),
-                _roomPrice(room),
-                const SizedBox(height: 48),
-              ],
-            ),
-          ),
-        );
-      },
+    return GestureDetector(
+      onTap: () => Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => DetailScreen(room: room))),
+      child: SizedBox(
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            _roomImages(room),
+            const SizedBox(height: 16),
+            _roomName(room),
+            const SizedBox(height: 16),
+            RoomLocation(room: room),
+            const SizedBox(height: 8),
+            _roomPrice(room),
+            DividerWidget(),
+          ],
+        ),
+      ),
     );
   }
 

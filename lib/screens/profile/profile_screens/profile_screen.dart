@@ -1,5 +1,5 @@
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/profile/profile_detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/profile/profile_screens/profile_detail_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/profile_widgets/activity_list_view.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';

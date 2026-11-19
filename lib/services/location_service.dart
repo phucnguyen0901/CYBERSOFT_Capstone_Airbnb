@@ -30,4 +30,25 @@ class LocationService {
       throw Exception(err);
     }
   }
+
+  static Future<ViTriViewModel> getLocationByID({required int maViTri}) async {
+    final url = Uri.parse('$apiDomain/api/vi-tri/$maViTri');
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
+      );
+      if (response.statusCode == 200) {
+        var resBody = jsonDecode(response.body);
+        var content = resBody['content'];
+        ViTriViewModel result = ViTriViewModel.fromMap(content);
+        return result;
+      } else {
+        throw Exception('Error');
+      }
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
 }

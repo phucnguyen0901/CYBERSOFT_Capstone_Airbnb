@@ -1,18 +1,14 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, required this.room});
   final PhongViewModel room;
 
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
-
-class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +53,7 @@ class _DetailScreenState extends State<DetailScreen> {
           AspectRatio(
             aspectRatio: 1,
             child: Image.network(
-              widget.room.hinhAnh,
+              room.hinhAnh,
               fit: .fitHeight,
               errorBuilder: (context, error, stackTrace) => Container(
                 color: Colors.grey[300],
@@ -75,9 +71,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 const SizedBox(height: 16),
                 _starRate(),
                 const SizedBox(height: 16),
-                Text('123 ABC street, DEF ward, GHI city'),
+                RoomLocation(room: room),
                 const DividerWidget(),
-                Text(widget.room.moTa),
+                Text(room.moTa),
                 const DividerWidget(),
                 _bedroom(),
                 const DividerWidget(),
@@ -94,7 +90,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Text _roomName() {
     return Text(
-      widget.room.tenPhong,
+      room.tenPhong,
       style: const TextStyle(fontSize: titleFontSize, fontWeight: .bold),
     );
   }
@@ -130,7 +126,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 const SizedBox(height: 4),
                 const Text('Bedroom', style: TextStyle(fontWeight: .bold)),
-                Text('${widget.room.giuong.toString()} standard bed(s)'),
+                Text('${room.giuong.toString()} standard bed(s)'),
               ],
             ),
           ),
@@ -152,14 +148,14 @@ class _DetailScreenState extends State<DetailScreen> {
           Column(
             crossAxisAlignment: .start,
             children: [
-              if (widget.room.mayGiat) _buildConvenient('mayGiat'),
-              if (widget.room.banLa) _buildConvenient('banLa'),
-              if (widget.room.dieuHoa) _buildConvenient('dieuHoa'),
-              if (widget.room.bep) _buildConvenient('bep'),
-              if (widget.room.tivi) _buildConvenient('tivi'),
-              if (widget.room.doXe) _buildConvenient('doXe'),
-              if (widget.room.wifi) _buildConvenient('wifi'),
-              if (widget.room.hoBoi) _buildConvenient('hoBoi'),
+              if (room.mayGiat) _buildConvenient('mayGiat'),
+              if (room.banLa) _buildConvenient('banLa'),
+              if (room.dieuHoa) _buildConvenient('dieuHoa'),
+              if (room.bep) _buildConvenient('bep'),
+              if (room.tivi) _buildConvenient('tivi'),
+              if (room.doXe) _buildConvenient('doXe'),
+              if (room.wifi) _buildConvenient('wifi'),
+              if (room.hoBoi) _buildConvenient('hoBoi'),
             ],
           ),
         ],
@@ -187,7 +183,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     const Icon(Icons.monetization_on_outlined),
                     const SizedBox(width: 8),
                     Text(
-                      '${widget.room.giaTien}\$ per. night ',
+                      '${room.giaTien}\$ per. night ',
                       style: const TextStyle(fontWeight: .bold, fontSize: 18),
                     ),
                   ],

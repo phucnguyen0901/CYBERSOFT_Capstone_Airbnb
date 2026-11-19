@@ -1,7 +1,7 @@
 import 'package:airbnb_cybersoft/models/booking_model.dart';
 import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/explore/detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screens/detail_screen.dart';
 import 'package:airbnb_cybersoft/services/reservation_service.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';

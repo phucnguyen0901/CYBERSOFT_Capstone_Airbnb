@@ -1,5 +1,5 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_widgets/rooms_list_view.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_widgets/rooms_tile_view.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +39,14 @@ class _RoomsByLocation extends State<RoomsByLocation> {
       appBar: _appBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 8),
-        child: RoomsListView(rooms: rooms),
+        child: ListView.builder(
+          padding: EdgeInsets.all(16),
+          itemCount: rooms.length,
+          itemBuilder: (context, index) {
+            var room = rooms[index];
+            return RoomsTileView(room: room);
+          },
+        ),
       ),
     );
   }

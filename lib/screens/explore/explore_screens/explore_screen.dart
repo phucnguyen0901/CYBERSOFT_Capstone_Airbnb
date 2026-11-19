@@ -1,8 +1,8 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/search_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screens/search_screen.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_widgets/rooms_list_view.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_widgets/rooms_tile_view.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +37,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
       child: Scaffold(
         appBar: _appBar(),
         floatingActionButton: _MapButton(),
-        body: RoomsListView(rooms: rooms),
+        body: ListView.builder(
+          padding: EdgeInsets.all(16),
+          itemCount: rooms.length,
+          itemBuilder: (context, index) {
+            var room = rooms[index];
+            return RoomsTileView(room: room);
+          },
+        ),
       ),
     );
   }

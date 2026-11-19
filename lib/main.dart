@@ -1,8 +1,8 @@
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/explore/explore_screen.dart';
-import 'package:airbnb_cybersoft/screens/profile/profile_screen.dart';
-import 'package:airbnb_cybersoft/screens/profile/register_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screens/explore_screen.dart';
+import 'package:airbnb_cybersoft/screens/profile/profile_screens/profile_screen.dart';
+import 'package:airbnb_cybersoft/screens/profile/profile_screens/register_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/secure_storage.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
@@ -23,10 +23,7 @@ Future<void> main() async {
 
   if (token != null && user != null) {
     authProvider.setLogin(token);
-    debugPrint('AuthProvider: Login successfully');
     userProvider.loadUser(user);
-    debugPrint('User Provider: Load user info successfully');
-    debugPrint('id: ${user.id}');
   }
 
   runApp(
@@ -58,7 +55,7 @@ class _AirbnbAppState extends State<AirbnbApp> {
       null,
       null,
       null,
-      authProvider.isLogin ? ProfileScreen() : RegisterScreen(),
+      authProvider.isLogin ? const ProfileScreen() : const RegisterScreen(),
     ];
 
     return MaterialApp(
