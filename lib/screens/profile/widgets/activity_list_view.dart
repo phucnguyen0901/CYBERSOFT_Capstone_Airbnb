@@ -59,109 +59,123 @@ class _ActivityListViewState extends State<ActivityListView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      reverse: true,
-      itemCount: rooms.length,
-      padding: const EdgeInsets.all(16),
-      itemBuilder: (context, index) {
-        var reserveInfo = history[index];
-        var room = rooms[index];
-        return GestureDetector(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => DetailScreen(room: room)),
-          ),
-          child: SizedBox(
-            child: Column(
-              mainAxisSize: .min,
-              crossAxisAlignment: .start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadiusGeometry.circular(24),
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Image.network(
-                      room.hinhAnh,
-                      fit: .cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: Colors.grey[300],
-                        child: const Center(
-                          child: Icon(Icons.image_not_supported),
-                        ),
-                      ),
-                    ),
+    return (rooms.isEmpty)
+        ? SizedBox(
+            height: 400,
+            width: 400,
+            child: Center(
+              child: const Text(
+                'No activities yet!',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+          )
+        : ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            reverse: true,
+            itemCount: rooms.length,
+            padding: const EdgeInsets.all(16),
+            itemBuilder: (context, index) {
+              var reserveInfo = history[index];
+              var room = rooms[index];
+              return GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => DetailScreen(room: room),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Row(
-                  crossAxisAlignment: .start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        room.tenPhong,
-                        style: const TextStyle(fontWeight: .bold),
-                        maxLines: 2,
-                        overflow: .ellipsis,
+                child: SizedBox(
+                  child: Column(
+                    mainAxisSize: .min,
+                    crossAxisAlignment: .start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadiusGeometry.circular(24),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Image.network(
+                            room.hinhAnh,
+                            fit: .cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                                  color: Colors.grey[300],
+                                  child: const Center(
+                                    child: Icon(Icons.image_not_supported),
+                                  ),
+                                ),
+                          ),
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 32),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.calendar_month_outlined,
-                      color: Colors.grey,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      'From ${dateTime(reserveInfo.ngayDen)} to ${dateTime(reserveInfo.ngayDi)}',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.people_outlined,
-                      color: Colors.grey,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '${reserveInfo.soLuongKhach.toString()} guest(s)',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.monetization_on_outlined,
-                      size: 20,
-                      color: primaryColor,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      '${room.giaTien}\$ per. night',
-                      style: const TextStyle(
-                        fontWeight: .bold,
-                        color: primaryColor,
+                      const SizedBox(height: 16),
+                      Row(
+                        crossAxisAlignment: .start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              room.tenPhong,
+                              style: const TextStyle(fontWeight: .bold),
+                              maxLines: 2,
+                              overflow: .ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 32),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.calendar_month_outlined,
+                            color: Colors.grey,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'From ${dateTime(reserveInfo.ngayDen)} to ${dateTime(reserveInfo.ngayDi)}',
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.people_outlined,
+                            color: Colors.grey,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${reserveInfo.soLuongKhach.toString()} guest(s)',
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.monetization_on_outlined,
+                            size: 20,
+                            color: primaryColor,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${room.giaTien}\$ per. night',
+                            style: const TextStyle(
+                              fontWeight: .bold,
+                              color: primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 48),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 48),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+              );
+            },
+          );
   }
 }

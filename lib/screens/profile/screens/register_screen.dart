@@ -1,7 +1,7 @@
 // import 'package:airbnb_cybersoft/models/login_model.dart';
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/profile/register_widgets/auth_bottom_sheet.dart';
+import 'package:airbnb_cybersoft/screens/profile/widgets/auth_bottom_sheet.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
