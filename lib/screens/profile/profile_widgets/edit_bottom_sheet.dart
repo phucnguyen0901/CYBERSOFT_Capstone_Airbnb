@@ -1,6 +1,5 @@
 import 'package:airbnb_cybersoft/models/user_model.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +16,6 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
   late final TextEditingController _emailController;
   late final TextEditingController _phoneController;
   late final TextEditingController _birthdayController;
-
-  bool _gender = true;
 
   @override
   void initState() {
@@ -46,7 +43,7 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
       email: _emailController.text.trim(),
       phone: _phoneController.text.trim(),
       birthday: _birthdayController.text.trim(),
-      gender: _gender,
+      gender: userProvider.user.gender,
       role: userProvider.user.role,
     );
   }
