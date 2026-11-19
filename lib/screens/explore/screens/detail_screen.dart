@@ -1,5 +1,8 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/screens/explore/widgets/floatting_bottom_bar.dart';
+import 'package:airbnb_cybersoft/screens/explore/widgets/floatting_top_bar.dart';
 import 'package:airbnb_cybersoft/screens/explore/widgets/review_container.dart';
+import 'package:airbnb_cybersoft/screens/explore/widgets/room_conveniences.dart';
 import 'package:airbnb_cybersoft/screens/explore/widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
@@ -14,35 +17,13 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(children: [_mainBody(), _topBar(context)]),
-      bottomSheet: _bottomSheet(),
-    );
-  }
-
-  SafeArea _topBar(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-        child: Row(
-          children: [
-            _buildButton(Icon(Icons.arrow_back_rounded), context),
-            const Expanded(child: SizedBox()),
-            _buildButton(
-              normalSvgIcon(
-                assetName: 'assets/icons/detail_room_icon/Upload.svg',
-              ),
-              null,
-            ),
-            SizedBox(width: 8),
-            _buildButton(
-              normalSvgIcon(
-                assetName: 'assets/icons/detail_room_icon/Menu.svg',
-              ),
-              null,
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          _mainBody(),
+          TopBar(context: context),
+        ],
       ),
+      bottomSheet: BottomBar(room: room),
     );
   }
 
@@ -135,125 +116,6 @@ class DetailScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  SafeArea _bottomSheet() {
-    return SafeArea(
-      child: BottomSheet(
-        onClosing: () {},
-
-        backgroundColor: Colors.grey[100],
-        builder: (context) {
-          return Padding(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            child: Row(
-              mainAxisAlignment: .spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.monetization_on_outlined),
-                    const SizedBox(width: 8),
-                    Text(
-                      '${room.giaTien}\$ per. night ',
-                      style: const TextStyle(fontWeight: .bold, fontSize: 18),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 32,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: primaryColor,
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Reserve',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: .bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  IconButton _buildButton(Widget icon, BuildContext? context) {
-    return IconButton(
-      padding: const EdgeInsets.all(4),
-      onPressed: () {
-        if (context != null) {
-          Navigator.of(context).pop();
-        }
-      },
-      icon: icon,
-      color: Colors.black,
-      style: IconButton.styleFrom(backgroundColor: Colors.white),
-    );
-  }
-}
-
-class RoomConveniences extends StatelessWidget {
-  const new({super.key, required this.room});
-
-  final PhongViewModel room;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: .start,
-        children: [
-          const Text(
-            'What\'s this place offer',
-            style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
-          ),
-          const SizedBox(height: 16),
-          Column(
-            crossAxisAlignment: .start,
-            children: [
-              if (room.mayGiat) _buildConvenient('mayGiat'),
-              if (room.banLa) _buildConvenient('banLa'),
-              if (room.dieuHoa) _buildConvenient('dieuHoa'),
-              if (room.bep) _buildConvenient('bep'),
-              if (room.tivi) _buildConvenient('tivi'),
-              if (room.doXe) _buildConvenient('doXe'),
-              if (room.wifi) _buildConvenient('wifi'),
-              if (room.hoBoi) _buildConvenient('hoBoi'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Row _buildConvenient(String tag) {
-    Map<String, dynamic> convenience = {};
-    for (var item in roomConvenients) {
-      if (item['tag'] == tag) {
-        convenience = item;
-      }
-    }
-    return Row(
-      children: [
-        normalSvgIcon(assetName: convenience['icon']),
-        const SizedBox(width: 16),
-        Text(convenience['label'], maxLines: 2, overflow: .ellipsis),
-      ],
     );
   }
 }

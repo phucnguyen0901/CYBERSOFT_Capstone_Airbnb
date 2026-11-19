@@ -1,0 +1,64 @@
+import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/utils/constant.dart';
+import 'package:flutter/material.dart';
+
+class BottomBar extends StatelessWidget {
+  const BottomBar({super.key, required this.room});
+
+  final PhongViewModel room;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: BottomSheet(
+        onClosing: () {},
+        enableDrag: false,
+        backgroundColor: Colors.grey[100],
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsetsGeometry.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.monetization_on_outlined),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${room.giaTien}\$ per. night ',
+                      style: const TextStyle(fontWeight: .bold, fontSize: 18),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 32,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: primaryColor,
+                  ),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Reserve',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: .bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

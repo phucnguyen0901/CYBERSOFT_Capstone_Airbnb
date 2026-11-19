@@ -22,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _getLocation(String keyword) {
-    LocationService.getLocations(keyword)
+    LocationService.getLocations(keyword: keyword)
         .then((value) {
           setState(() {
             locationList = value;

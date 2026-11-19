@@ -8,8 +8,12 @@ final apiDomain = dotenv.env['API_DOMAIN_URL'];
 final token = dotenv.env['CYBERSOFT_TOKEN'] ?? '';
 
 class LocationService {
-  static Future<List<ViTriViewModel>> getLocations(String keyword) async {
-    final url = Uri.parse('$apiDomain/api/vi-tri?keyword=$keyword');
+  static Future<List<ViTriViewModel>> getLocations({
+    required String keyword,
+  }) async {
+    final url = Uri.parse(
+      '$apiDomain/api/vi-tri/phan-trang-tim-kiem?pageIndex=1&pageSize=50&keyword=$keyword',
+    );
 
     try {
       final response = await http.get(
@@ -18,8 +22,9 @@ class LocationService {
       );
       if (response.statusCode == 200) {
         var resBody = jsonDecode(response.body);
-        List content = resBody['content'];
-        List<ViTriViewModel> result = content
+        var content = resBody['content'];
+        List data = content['data'];
+        List<ViTriViewModel> result = data
             .map((item) => ViTriViewModel.fromMap(item))
             .toList();
         return result;
