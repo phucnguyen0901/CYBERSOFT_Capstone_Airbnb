@@ -32,7 +32,7 @@ class _ReviewContainerState extends State<ReviewContainer> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: secondaryColor,
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(16),
         ),

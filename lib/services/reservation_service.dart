@@ -28,7 +28,32 @@ class ReservationService {
             .toList();
         return result;
       } else {
-        throw Exception('Error');
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
+      }
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
+  static Future<bool> booking(Map<String, dynamic> reserveInfo) async {
+    final url = Uri.parse('$apiDomain/api/dat-phong');
+
+    try {
+      var success = false;
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json', 'tokenCybersoft': token},
+        body: jsonEncode(reserveInfo),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        success = true;
+        return success;
+      } else {
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
       }
     } catch (err) {
       throw Exception(err);

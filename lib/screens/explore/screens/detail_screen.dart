@@ -99,7 +99,7 @@ class DetailScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey[100],
+              color: secondaryColor,
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -132,7 +132,7 @@ class DetailScreen extends StatelessWidget {
         const SizedBox(width: 24),
         normalSvgIcon(
           assetName: 'assets/icons/detail_room_icon/Airbnb-Protect.svg',
-          color: Colors.red,
+          color: primaryColor,
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:airbnb_cybersoft/providers/activity_provider.dart';
 import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/explore/screens/explore_screen.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
 
   var authProvider = AuthProvider();
   var userProvider = UserProvider();
+  var activityProvider = ActivityProvider();
 
   final token = await getAccessToken();
   final user = await getUserInfo();
@@ -31,6 +33,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider.value(value: authProvider),
         ChangeNotifierProvider.value(value: userProvider),
+        ChangeNotifierProvider.value(value: activityProvider),
       ],
       child: const AirbnbApp(),
     ),
@@ -50,13 +53,6 @@ class _AirbnbAppState extends State<AirbnbApp> {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
-    final pageRoutes = [
-      ExploreScreen(),
-      null,
-      null,
-      null,
-      authProvider.isLogin ? const ProfileScreen() : const RegisterScreen(),
-    ];
 
     return MaterialApp(
       theme: ThemeData(
@@ -68,13 +64,24 @@ class _AirbnbAppState extends State<AirbnbApp> {
         ),
         iconTheme: const IconThemeData(size: 20),
         scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         bottomSheetTheme: const BottomSheetThemeData(
           backgroundColor: Colors.white,
         ),
       ),
       home: Scaffold(
-        body: pageRoutes[_navIndex],
+        body: IndexedStack(
+          index: _navIndex,
+          children: [
+            ExploreScreen(),
+            Center(),
+            Center(),
+            Center(),
+            authProvider.isLogin
+                ? const ProfileScreen()
+                : const RegisterScreen(),
+          ],
+        ),
         bottomNavigationBar: _navigationBar(),
       ),
       debugShowCheckedModeBanner: false,

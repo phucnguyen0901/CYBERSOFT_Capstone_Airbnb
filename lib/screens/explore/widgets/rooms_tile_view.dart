@@ -22,7 +22,7 @@ class RoomsTileView extends StatelessWidget {
             _roomImages(room),
             const SizedBox(height: 16),
             _roomName(room),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             RoomLocation(room: room, color: Colors.grey),
             const SizedBox(height: 4),
             _roomPrice(room),

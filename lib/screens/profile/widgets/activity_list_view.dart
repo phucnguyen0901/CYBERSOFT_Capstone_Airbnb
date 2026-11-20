@@ -1,8 +1,7 @@
-import 'package:airbnb_cybersoft/models/booking_model.dart';
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/providers/activity_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/explore/screens/detail_screen.dart';
-import 'package:airbnb_cybersoft/services/reservation_service.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -16,28 +15,24 @@ class ActivityListView extends StatefulWidget {
 }
 
 class _ActivityListViewState extends State<ActivityListView> {
-  List<DatPhongViewModel> history = [];
   List<PhongViewModel> rooms = [];
 
   @override
   void initState() {
-    _getHistory();
     super.initState();
+    _getHistory();
   }
 
-  void _getHistory() {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+  void _getHistory() async {
+    final userProvider = context.read<UserProvider>();
     final maNguoiDung = userProvider.user.id!;
-    ReservationService.getRoomsByUserID(maNguoiDung)
-        .then((values) {
-          setState(() {
-            history = values;
-          });
-          for (var item in history) {
-            _getRoomInfo(item.maPhong);
-          }
-        })
-        .catchError((err) {});
+
+    final activityProvider = context.read<ActivityProvider>();
+    await activityProvider.getActivities(maNguoiDung);
+    final history = activityProvider.activities;
+    for (var item in history) {
+      _getRoomInfo(item.maPhong);
+    }
   }
 
   void _getRoomInfo(int id) {
@@ -59,6 +54,8 @@ class _ActivityListViewState extends State<ActivityListView> {
 
   @override
   Widget build(BuildContext context) {
+    final activities = context.watch<ActivityProvider>().activities;
+
     return (rooms.isEmpty)
         ? SizedBox(
             height: 400,
@@ -77,7 +74,7 @@ class _ActivityListViewState extends State<ActivityListView> {
             itemCount: rooms.length,
             padding: const EdgeInsets.all(16),
             itemBuilder: (context, index) {
-              var reserveInfo = history[index];
+              var reserveInfo = activities[index];
               var room = rooms[index];
               return GestureDetector(
                 onTap: () => Navigator.of(context).push(

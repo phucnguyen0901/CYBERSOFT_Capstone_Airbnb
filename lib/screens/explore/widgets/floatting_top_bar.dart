@@ -1,9 +1,9 @@
+import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key, required this.context});
-
   final BuildContext context;
 
   @override
@@ -44,7 +44,7 @@ class TopBar extends StatelessWidget {
       },
       icon: icon,
       color: Colors.black,
-      style: IconButton.styleFrom(backgroundColor: Colors.white),
+      style: IconButton.styleFrom(backgroundColor: secondaryColor),
     );
   }
 }

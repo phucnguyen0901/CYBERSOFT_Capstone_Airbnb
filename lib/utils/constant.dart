@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color primaryColor = Color.fromARGB(255, 180, 13, 1);
+const Color secondaryColor = Color.fromRGBO(245, 245, 245, 1);
 
 const double headerFontSized = 40;
 const double titleFontSize = 24;
