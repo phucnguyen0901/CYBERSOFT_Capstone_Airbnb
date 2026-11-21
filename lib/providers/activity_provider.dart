@@ -1,20 +1,25 @@
 import 'package:airbnb_cybersoft/models/booking_model.dart';
+import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/services/reservation_service.dart';
+import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:flutter/material.dart';
 
 class ActivityProvider extends ChangeNotifier {
   List<DatPhongViewModel> _activities = [];
+  List<PhongViewModel> _rooms = [];
 
   List<DatPhongViewModel> get activities => _activities;
-
-  void loadActivity(List<DatPhongViewModel> activities) {
-    _activities = activities;
-    notifyListeners();
-  }
+  List<PhongViewModel> get rooms => _rooms;
 
   Future<void> getActivities(int maNguoiDung) async {
-    final result = await ReservationService.getRoomsByUserID(maNguoiDung);
-    loadActivity(result);
+    final activities = await ReservationService.getRoomsByUserID(maNguoiDung);
+    final rooms = await Future.wait(
+      activities.map((activity) => RoomService.getRoomByID(activity.maPhong)),
+    );
+
+    _activities = activities;
+    _rooms = rooms;
+    notifyListeners();
   }
 
   Future<void> booking(DatPhongViewModel reserveInfo) async {

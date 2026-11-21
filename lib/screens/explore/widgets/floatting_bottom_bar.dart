@@ -1,7 +1,10 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
+import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/screens/reservation/screens/reservation_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key, required this.room});
@@ -10,6 +13,7 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.watch<AuthProvider>();
     return SafeArea(
       child: BottomSheet(
         onClosing: () {},
@@ -35,11 +39,19 @@ class BottomBar extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ReservationScreen(room: room),
-                    ),
-                  ),
+                  onTap: () {
+                    if (authProvider.isLogin != false) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ReservationScreen(room: room),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(_errorSnackBar());
+                    }
+                  },
+
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       vertical: 16,
@@ -63,6 +75,19 @@ class BottomBar extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  SnackBar _errorSnackBar() {
+    return SnackBar(
+      duration: Duration(seconds: 3),
+      content: Padding(
+        padding: EdgeInsets.all(16),
+        child: Text(
+          'Please sign in your account to continue!',
+          style: TextStyle(fontWeight: .bold),
+        ),
       ),
     );
   }

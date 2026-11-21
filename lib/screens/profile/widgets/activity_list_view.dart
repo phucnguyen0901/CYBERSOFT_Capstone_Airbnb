@@ -1,8 +1,6 @@
-import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/providers/activity_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/explore/screens/detail_screen.dart';
-import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,34 +13,13 @@ class ActivityListView extends StatefulWidget {
 }
 
 class _ActivityListViewState extends State<ActivityListView> {
-  List<PhongViewModel> rooms = [];
-
   @override
   void initState() {
     super.initState();
-    _getHistory();
-  }
-
-  void _getHistory() async {
     final userProvider = context.read<UserProvider>();
     final maNguoiDung = userProvider.user.id!;
-
     final activityProvider = context.read<ActivityProvider>();
-    await activityProvider.getActivities(maNguoiDung);
-    final history = activityProvider.activities;
-    for (var item in history) {
-      _getRoomInfo(item.maPhong);
-    }
-  }
-
-  void _getRoomInfo(int id) {
-    RoomService.getRoomByID(id)
-        .then((value) {
-          setState(() {
-            rooms.add(value);
-          });
-        })
-        .catchError((onError) {});
+    activityProvider.getActivities(maNguoiDung);
   }
 
   String dateTime(String dtString) {
@@ -55,12 +32,13 @@ class _ActivityListViewState extends State<ActivityListView> {
   @override
   Widget build(BuildContext context) {
     final activities = context.watch<ActivityProvider>().activities;
+    final rooms = context.watch<ActivityProvider>().rooms;
 
     return (rooms.isEmpty)
-        ? SizedBox(
-            height: 400,
-            width: 400,
-            child: Center(
+        ? Center(
+            child: SizedBox(
+              height: 400,
+              width: 400,
               child: const Text(
                 'No activities yet!',
                 style: TextStyle(color: Colors.grey),
@@ -71,7 +49,7 @@ class _ActivityListViewState extends State<ActivityListView> {
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             reverse: true,
-            itemCount: rooms.length,
+            itemCount: activities.length,
             padding: const EdgeInsets.all(16),
             itemBuilder: (context, index) {
               var reserveInfo = activities[index];

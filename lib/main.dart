@@ -54,6 +54,14 @@ class _AirbnbAppState extends State<AirbnbApp> {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
 
+    final pageRoutes = [
+      ExploreScreen(),
+      null,
+      null,
+      null,
+      authProvider.isLogin ? const ProfileScreen() : const RegisterScreen(),
+    ];
+
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.googleSans().fontFamily,
