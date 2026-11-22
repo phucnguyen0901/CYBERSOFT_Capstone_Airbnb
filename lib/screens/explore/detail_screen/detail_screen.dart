@@ -1,9 +1,9 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/floatting_bottom_bar.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/floatting_top_bar.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/review_container.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/room_conveniences.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/room_location.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/floatting_bottom_bar.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/floatting_top_bar.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/review_container.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/room_conveniences.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screen/widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
@@ -51,8 +51,6 @@ class DetailScreen extends StatelessWidget {
               children: [
                 _roomName(),
                 const SizedBox(height: 16),
-                _starRate(),
-                const SizedBox(height: 16),
                 RoomLocation(room: room),
                 const DividerWidget(),
                 Text(room.moTa),
@@ -61,7 +59,7 @@ class DetailScreen extends StatelessWidget {
                 const DividerWidget(),
                 RoomConveniences(room: room),
                 const DividerWidget(),
-                ReviewContainer(),
+                ReviewContainer(maPhong: room.id!),
                 const DividerWidget(),
                 _notice(),
                 const SizedBox(height: 80),
@@ -77,12 +75,6 @@ class DetailScreen extends StatelessWidget {
     return Text(
       room.tenPhong,
       style: const TextStyle(fontSize: titleFontSize, fontWeight: .bold),
-    );
-  }
-
-  Row _starRate() {
-    return const Row(
-      children: [Icon(Icons.star_rounded), Text('5.0 . '), Text('3 reviews')],
     );
   }
 

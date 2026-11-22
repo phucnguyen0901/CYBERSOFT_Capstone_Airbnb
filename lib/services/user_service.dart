@@ -21,7 +21,9 @@ class UserService {
         UserResponse result = UserResponse.fromMap(resBody);
         return result;
       } else {
-        throw Exception('Error');
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
       }
     } catch (err) {
       throw Exception(err);
@@ -45,7 +47,37 @@ class UserService {
         UserResponse result = UserResponse.fromMap(resBody);
         return result;
       } else {
-        throw Exception('Error');
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
+      }
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
+  static Future<ThongTinNguoiDung> uploadAvatar({
+    required String accessToken,
+  }) async {
+    final url = Uri.parse('$apiDomain/api/users/upload-avatar');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'token': accessToken,
+          'tokenCybersoft': token,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var resBody = jsonDecode(response.body);
+        ThongTinNguoiDung result = ThongTinNguoiDung.fromMap(resBody);
+        return result;
+      } else {
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
       }
     } catch (err) {
       throw Exception(err);

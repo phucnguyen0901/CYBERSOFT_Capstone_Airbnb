@@ -13,10 +13,6 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clearUser() {
-    notifyListeners();
-  }
-
   Future<UserResponse> getUserInfo({required int id}) async {
     final result = await UserService.getUserInfoByID(id);
     return result;
@@ -40,10 +36,7 @@ class UserProvider extends ChangeNotifier {
       'gender': gender,
       'role': role,
     };
-    await UserService.updateUser(id, updateData);
-    final result = await UserService.getUserInfoByID(id);
-    await clearUserInfo();
-    clearUser();
+    final result = await UserService.updateUser(id, updateData);
     await saveUserInfo(user: result.user);
     loadUser(result.user);
   }

@@ -16,13 +16,17 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
   late final TextEditingController _emailController;
   late final TextEditingController _phoneController;
   late final TextEditingController _birthdayController;
+  late final String _currentAvatar;
+  late bool? _gender;
 
   @override
   void initState() {
+    _currentAvatar = widget.user.avatar!;
     _nameController = TextEditingController(text: widget.user.name);
     _emailController = TextEditingController(text: widget.user.email);
     _phoneController = TextEditingController(text: widget.user.phone);
     _birthdayController = TextEditingController(text: widget.user.birthday);
+    _gender = widget.user.gender;
     super.initState();
   }
 
@@ -43,7 +47,7 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
       email: _emailController.text.trim(),
       phone: _phoneController.text.trim(),
       birthday: _birthdayController.text.trim(),
-      gender: userProvider.user.gender,
+      gender: _gender!,
       role: userProvider.user.role,
     );
   }
@@ -52,79 +56,134 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.close),
-            ),
-            const Expanded(
-              child: Center(
-                child: Text(
-                  'Edit profile',
-                  style: TextStyle(fontWeight: .bold),
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                _edit();
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'Save',
-                style: TextStyle(decoration: .underline, color: Colors.black),
-              ),
-            ),
-          ],
-        ),
+        _header(context),
         const Divider(),
-        const SizedBox(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: CircleAvatar(backgroundColor: Colors.grey, radius: 80),
-          ),
+        _avatar(),
+        const SizedBox(height: 32),
+        _buildEditTile(label: 'Name', controller: _nameController),
+        const SizedBox(height: 16, child: Divider()),
+        _buildEditTile(
+          label: 'Email',
+          controller: _emailController,
+          keyboardType: TextInputType.emailAddress,
         ),
-        const SizedBox(height: 16),
-        _buildEditTile('Name', _nameController),
         const SizedBox(height: 16, child: Divider()),
-        _buildEditTile('Email', _emailController),
-        const SizedBox(height: 16, child: Divider()),
-        _buildEditTile('Phone', _phoneController),
-        const SizedBox(height: 16, child: Divider()),
-        _buildEditTile('Birthday', _birthdayController),
-        const SizedBox(height: 16, child: Divider()),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          child: Row(
-            children: [
-              SizedBox(width: 80, child: Text('Gender')),
-              const SizedBox(width: 8),
-            ],
-          ),
+        _buildEditTile(
+          label: 'Phone',
+          controller: _phoneController,
+          keyboardType: TextInputType.phone,
         ),
+        const SizedBox(height: 16, child: Divider()),
+        _buildEditTile(
+          label: 'Birthday',
+          controller: _birthdayController,
+          keyboardType: TextInputType.datetime,
+        ),
+        const SizedBox(height: 16, child: Divider()),
+        _selectGender(),
         const SizedBox(height: 16, child: Divider()),
       ],
     );
   }
 
-  Row _buildEditTile(String label, TextEditingController? controller) {
+  Row _header(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 80, child: Text(label)),
-        const SizedBox(width: 8),
-        Expanded(
-          flex: 3,
-          child: TextFormField(
-            controller: controller,
-            textAlign: .end,
-            style: TextStyle(fontWeight: .bold),
-            decoration: InputDecoration(border: .none),
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.close),
+        ),
+        const Expanded(
+          child: Center(
+            child: Text('Edit profile', style: TextStyle(fontWeight: .bold)),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            _edit();
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'Save',
+            style: TextStyle(decoration: .underline, color: Colors.black),
           ),
         ),
       ],
+    );
+  }
+
+  SizedBox _avatar() {
+    return SizedBox(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        child: CircleAvatar(
+          radius: 100,
+          backgroundImage: NetworkImage(_currentAvatar),
+          onBackgroundImageError: (exception, stackTrace) {
+            Container(
+              color: Colors.grey,
+              child: Icon(Icons.image_not_supported),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  SizedBox _buildEditTile({
+    required String label,
+    required TextEditingController controller,
+    TextInputType? keyboardType = TextInputType.text,
+  }) {
+    return SizedBox(
+      height: 50,
+      child: Row(
+        children: [
+          Text(label),
+          const SizedBox(width: 16),
+          Expanded(
+            flex: 3,
+            child: TextFormField(
+              controller: controller,
+              keyboardType: keyboardType,
+              textAlign: .end,
+              style: TextStyle(fontWeight: .bold),
+              decoration: InputDecoration(border: .none),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox _selectGender() {
+    return SizedBox(
+      height: 50,
+      child: Row(
+        children: [
+          const Text('Gender'),
+          Expanded(child: const SizedBox()),
+          RadioGroup(
+            groupValue: _gender,
+            onChanged: (newValue) {
+              setState(() {
+                _gender = newValue;
+              });
+            },
+            child: Row(
+              children: [
+                Radio(value: true),
+                const Text('Male'),
+                const SizedBox(width: 16),
+                Radio(value: false),
+                const Text('Female'),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

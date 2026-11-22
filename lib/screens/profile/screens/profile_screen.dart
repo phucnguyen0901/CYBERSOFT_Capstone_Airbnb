@@ -1,3 +1,4 @@
+import 'package:airbnb_cybersoft/models/user_model.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
 import 'package:airbnb_cybersoft/screens/profile/screens/profile_detail_screen.dart';
 import 'package:airbnb_cybersoft/screens/profile/widgets/activity_list_view.dart';
@@ -16,9 +17,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreen extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final userProvider = context.watch<UserProvider>();
-    var userName = userProvider.user.name;
-    var userID = userProvider.user.id!;
+    final user = context.watch<UserProvider>().user;
 
     return Scaffold(
       body: SafeArea(
@@ -27,7 +26,7 @@ class _ProfileScreen extends State<ProfileScreen> {
             crossAxisAlignment: .start,
             children: [
               const SizedBox(height: 16),
-              _header(userName, userID),
+              _header(user),
               const DividerWidget(),
               Padding(
                 padding: const EdgeInsetsGeometry.symmetric(horizontal: 16),
@@ -45,7 +44,7 @@ class _ProfileScreen extends State<ProfileScreen> {
     );
   }
 
-  Widget _header(String userName, int userID) {
+  Widget _header(ThongTinNguoiDung user) {
     return Padding(
       padding: const EdgeInsetsGeometry.symmetric(horizontal: 16),
       child: Column(
@@ -54,15 +53,15 @@ class _ProfileScreen extends State<ProfileScreen> {
           const SizedBox(height: 16),
           CircleAvatar(
             radius: 35,
-            backgroundImage: NetworkImage(
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMzkYfwmc1UjcLkt-4kUv7_Gd_vA3ayx6-33dej-XXyw&s=10',
+            backgroundImage: NetworkImage(user.avatar!),
+            onBackgroundImageError: (exception, stackTrace) => Container(
+              color: Colors.grey,
+              child: Icon(Icons.image_not_supported),
             ),
-            onBackgroundImageError: (exception, stackTrace) =>
-                Container(color: Colors.grey),
           ),
           const SizedBox(height: 16),
           Text(
-            userName,
+            user.name,
             style: const TextStyle(
               fontSize: headerFontSized,
               fontWeight: .bold,

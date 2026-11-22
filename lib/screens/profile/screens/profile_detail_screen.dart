@@ -48,16 +48,14 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
     if (_isLoggingOut) return;
 
     final authProvider = context.read<AuthProvider>();
-    final userProvider = context.read<UserProvider>();
+
     setState(() => _isLoggingOut = true);
     try {
       await clearToken();
       await clearUserInfo();
       if (!mounted) return;
-
       Navigator.of(context).pop();
       authProvider.setLogout();
-      userProvider.clearUser();
     } catch (error) {
       if (mounted) {
         ScaffoldMessenger.of(context)
@@ -75,7 +73,6 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
     final userProvider = context.watch<UserProvider>();
     user = userProvider.user;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: _appBar(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -168,11 +165,11 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
       children: [
         CircleAvatar(
           radius: 65,
-          backgroundImage: NetworkImage(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMzkYfwmc1UjcLkt-4kUv7_Gd_vA3ayx6-33dej-XXyw&s=10',
+          backgroundImage: NetworkImage(user.avatar!),
+          onBackgroundImageError: (exception, stackTrace) => Container(
+            color: Colors.grey,
+            child: Icon(Icons.image_not_supported),
           ),
-          onBackgroundImageError: (exception, stackTrace) =>
-              Container(color: Colors.grey),
         ),
         const SizedBox(height: 16),
         Text(

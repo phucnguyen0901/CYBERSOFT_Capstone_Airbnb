@@ -29,7 +29,7 @@ class ThongTinNguoiDung {
       'password': password,
       'phone': phone,
       'birthday': birthday,
-      // 'avatar': avatar,
+      'avatar': avatar,
       'gender': gender,
       'role': role,
     };

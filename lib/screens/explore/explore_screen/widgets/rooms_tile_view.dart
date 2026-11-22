@@ -1,6 +1,6 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/screens/detail_screen.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/room_location.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screen/widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -50,27 +50,12 @@ class RoomsTileView extends StatelessWidget {
     );
   }
 
-  Row _roomName(PhongViewModel room) {
-    return Row(
-      crossAxisAlignment: .start,
-      children: [
-        Expanded(
-          child: Text(
-            room.tenPhong,
-            style: const TextStyle(fontWeight: .bold),
-            maxLines: 2,
-            overflow: .ellipsis,
-          ),
-        ),
-        const SizedBox(width: 32),
-        Row(
-          children: [
-            const Icon(Icons.star_rate_rounded, color: Colors.amber),
-            const SizedBox(width: 4),
-            const Text('4.87 (71)'),
-          ],
-        ),
-      ],
+  Widget _roomName(PhongViewModel room) {
+    return Text(
+      room.tenPhong,
+      style: const TextStyle(fontWeight: .bold),
+      maxLines: 2,
+      overflow: .ellipsis,
     );
   }
 

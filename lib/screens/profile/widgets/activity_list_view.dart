@@ -1,6 +1,6 @@
 import 'package:airbnb_cybersoft/providers/activity_provider.dart';
 import 'package:airbnb_cybersoft/providers/user_provider.dart';
-import 'package:airbnb_cybersoft/screens/explore/screens/detail_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/detail_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

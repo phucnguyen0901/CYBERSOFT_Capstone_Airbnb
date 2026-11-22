@@ -82,7 +82,7 @@ class BottomBar extends StatelessWidget {
     return SnackBar(
       duration: Duration(seconds: 3),
       content: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(8),
         child: Text(
           'Please sign in your account to continue!',
           style: TextStyle(fontWeight: .bold),

@@ -27,7 +27,9 @@ class AuthService {
         final result = jsonDecode(utf8.decode(response.bodyBytes));
         return AuthResponse.fromMap(result);
       } else {
-        throw Exception('Error');
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
       }
     } catch (err) {
       throw Exception(err);

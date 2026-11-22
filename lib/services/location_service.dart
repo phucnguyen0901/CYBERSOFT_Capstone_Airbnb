@@ -29,7 +29,9 @@ class LocationService {
             .toList();
         return result;
       } else {
-        throw Exception('Error');
+        throw Exception(
+          'Failed: HTTP ${response.statusCode}; response: ${response.body}',
+        );
       }
     } catch (err) {
       throw Exception(err);

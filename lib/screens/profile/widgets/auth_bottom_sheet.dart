@@ -1,4 +1,5 @@
 import 'package:airbnb_cybersoft/utils/constant.dart';
+import 'package:airbnb_cybersoft/utils/validation.dart';
 import 'package:flutter/material.dart';
 
 enum AuthMode { signIn, signUp }
@@ -85,16 +86,18 @@ class _AuthBottomSheetState extends State<AuthBottomSheet> {
                 _buildTextField(
                   controller: _userNameController,
                   label: 'Your name',
-                  validator: _requiredValidator,
+                  validator: requiredValidator,
                 ),
               if (_isSignUp)
                 _buildTextField(
                   controller: _phoneController,
+                  keyboardType: .phone,
                   label: 'Phone number',
-                  validator: _requiredValidator,
+                  validator: requiredValidator,
                 ),
               _buildTextField(
                 controller: _emailController,
+                keyboardType: .emailAddress,
                 label: 'Email',
                 validator: (input) =>
                     input!.isValidEmail() ? null : 'Check your email again!',
@@ -103,7 +106,7 @@ class _AuthBottomSheetState extends State<AuthBottomSheet> {
                 controller: _passwordController,
                 label: 'Password',
                 obscureText: true,
-                validator: _requiredValidator,
+                validator: requiredValidator,
               ),
               if (_isSignUp)
                 _buildTextField(
@@ -173,10 +176,12 @@ class _AuthBottomSheetState extends State<AuthBottomSheet> {
     required TextEditingController controller,
     required String label,
     required String? Function(String?) validator,
+    TextInputType keyboardType = .text,
     bool obscureText = false,
   }) {
     return TextFormField(
       controller: controller,
+      keyboardType: keyboardType,
       obscureText: obscureText,
       validator: validator,
       decoration: InputDecoration(
@@ -184,13 +189,6 @@ class _AuthBottomSheetState extends State<AuthBottomSheet> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
-  }
-
-  String? _requiredValidator(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'This field is required';
-    }
-    return null;
   }
 }
 
@@ -208,12 +206,4 @@ class AuthFormData {
   final String email;
   final String password;
   final String phone;
-}
-
-extension EmailValidator on String {
-  bool isValidEmail() {
-    return RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
-    ).hasMatch(this);
-  }
 }

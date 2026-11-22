@@ -1,9 +1,9 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
-import 'package:airbnb_cybersoft/screens/explore/screens/search_screen.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/map_button.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screen/search_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screen/widgets/map_button.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
-import 'package:airbnb_cybersoft/screens/explore/widgets/rooms_tile_view.dart';
+import 'package:airbnb_cybersoft/screens/explore/explore_screen/widgets/rooms_tile_view.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
 
