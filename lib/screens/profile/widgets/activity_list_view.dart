@@ -35,10 +35,9 @@ class _ActivityListViewState extends State<ActivityListView> {
     final rooms = context.watch<ActivityProvider>().rooms;
 
     return (rooms.isEmpty)
-        ? Center(
-            child: SizedBox(
-              height: 400,
-              width: 400,
+        ? Padding(
+            padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 16),
+            child: Center(
               child: const Text(
                 'No activities yet!',
                 style: TextStyle(color: Colors.grey),

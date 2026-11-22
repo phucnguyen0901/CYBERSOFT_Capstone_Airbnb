@@ -65,7 +65,7 @@ class RoomsTileView extends StatelessWidget {
         const SizedBox(width: 32),
         Row(
           children: [
-            const Icon(Icons.star, size: 20),
+            const Icon(Icons.star_rate_rounded, color: Colors.amber),
             const SizedBox(width: 4),
             const Text('4.87 (71)'),
           ],

@@ -92,7 +92,7 @@ class DetailScreen extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           const Text(
-            'Where you\'ll sleep',
+            'Where you\'ll sleep?',
             style: TextStyle(fontWeight: .bold, fontSize: titleFontSize),
           ),
           const SizedBox(height: 16),
