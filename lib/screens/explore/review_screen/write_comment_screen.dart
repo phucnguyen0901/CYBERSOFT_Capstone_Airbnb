@@ -92,7 +92,7 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
                       },
                       icon: Icon(
                         Icons.star_rate_rounded,
-                        color: (index <= saoBinhLuan)
+                        color: (index <= saoBinhLuan - 1)
                             ? Colors.amber
                             : Colors.grey,
                         size: 30,

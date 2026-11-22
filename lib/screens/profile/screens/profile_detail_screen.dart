@@ -139,18 +139,23 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
                 ),
                 const SizedBox(height: 16),
-                (user!.phone == 'string')
-                    ? const Text(
-                        'No matt confirmed',
-                        style: TextStyle(color: Colors.grey),
-                      )
-                    : const Row(
-                        children: [
-                          Icon(Icons.done),
-                          SizedBox(width: 16),
-                          Text('Phone number'),
-                        ],
-                      ),
+                if (user!.phone != 'string')
+                  const Row(
+                    children: [
+                      Icon(Icons.done),
+                      SizedBox(width: 16),
+                      Text('Phone number'),
+                    ],
+                  ),
+                const SizedBox(height: 4),
+                if (user!.email != 'string')
+                  const Row(
+                    children: [
+                      Icon(Icons.done),
+                      SizedBox(width: 16),
+                      Text('Email address'),
+                    ],
+                  ),
               ],
             ),
           ),
