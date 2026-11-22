@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:airbnb_cybersoft/models/location_model.dart';
 import 'package:airbnb_cybersoft/screens/explore/explore_screen/rooms_by_location.dart';
 import 'package:airbnb_cybersoft/services/location_service.dart';
@@ -14,6 +16,8 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<ViTriViewModel> locationList = [];
   final TextEditingController _searchController = TextEditingController();
+
+  Timer? _debounce;
 
   @override
   void initState() {
@@ -35,6 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
   }
@@ -100,7 +105,11 @@ class _SearchScreenState extends State<SearchScreen> {
               suffixIcon: const Icon(Icons.close_rounded),
             ),
             onChanged: (value) {
-              _getLocation(value);
+              _debounce?.cancel();
+              _debounce = Timer(
+                const Duration(microseconds: 300),
+                () => _getLocation(value),
+              );
             },
           ),
           const SizedBox(height: 16),

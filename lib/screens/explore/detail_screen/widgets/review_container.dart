@@ -103,7 +103,7 @@ class _ReviewContainerState extends State<ReviewContainer> {
       child: (comments.isEmpty)
           ? Center(child: Text('Empty!'))
           : ListView.builder(
-              itemCount: 10,
+              itemCount: (revComments.length > 10) ? 10 : revComments.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 var comment = revComments[index];
