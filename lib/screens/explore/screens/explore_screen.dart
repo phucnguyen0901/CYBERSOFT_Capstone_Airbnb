@@ -1,5 +1,6 @@
 import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/screens/explore/screens/search_screen.dart';
+import 'package:airbnb_cybersoft/screens/explore/widgets/map_button.dart';
 import 'package:airbnb_cybersoft/services/room_service.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/screens/explore/widgets/rooms_tile_view.dart';
@@ -36,7 +37,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       length: tabBarItems.length,
       child: Scaffold(
         appBar: _appBar(),
-        floatingActionButton: _MapButton(),
+        floatingActionButton: MapButton(),
         body: ListView.builder(
           padding: EdgeInsets.all(16),
           itemCount: rooms.length,
@@ -103,33 +104,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
             text: tabBarItem['label'],
           );
         }),
-      ),
-    );
-  }
-}
-
-class _MapButton extends StatelessWidget {
-  @override
-  InkWell build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(100),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        child: Row(
-          mainAxisSize: .min,
-          children: [
-            const Text(
-              'Map',
-              style: TextStyle(color: Colors.white, fontWeight: .bold),
-            ),
-            const SizedBox(width: 8),
-            const Icon(Icons.map, color: Colors.white),
-          ],
-        ),
       ),
     );
   }

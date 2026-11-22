@@ -46,6 +46,7 @@ class ReservationBottomBar extends StatelessWidget {
                       ? null
                       : () async {
                           await activityProvider.booking(reserveInfo);
+                          if (!context.mounted) return;
                           Navigator.of(context).pop();
                         },
                   child: Container(

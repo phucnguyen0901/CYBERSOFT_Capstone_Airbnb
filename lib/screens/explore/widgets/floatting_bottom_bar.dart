@@ -3,7 +3,6 @@ import 'package:airbnb_cybersoft/providers/auth_provider.dart';
 import 'package:airbnb_cybersoft/screens/reservation/screens/reservation_screen.dart';
 import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class BottomBar extends StatelessWidget {
