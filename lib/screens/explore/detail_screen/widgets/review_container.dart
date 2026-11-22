@@ -64,10 +64,11 @@ class _ReviewContainerState extends State<ReviewContainer> {
       onTap: (!isLogin)
           ? () => ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                duration: Duration(seconds: 3),
                 content: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Please sign in your account to continue',
+                    'Please sign in your account to continue!',
                     style: TextStyle(fontWeight: .bold),
                   ),
                 ),
@@ -84,13 +85,13 @@ class _ReviewContainerState extends State<ReviewContainer> {
             },
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: secondaryColor,
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Center(
+        child: const Center(
           child: Text('Rate this room', style: TextStyle(fontWeight: .bold)),
         ),
       ),
@@ -101,7 +102,9 @@ class _ReviewContainerState extends State<ReviewContainer> {
     return SizedBox(
       height: 260,
       child: (comments.isEmpty)
-          ? Center(child: Text('Empty!'))
+          ? const Center(
+              child: Text('Empty!', style: TextStyle(color: Colors.grey)),
+            )
           : ListView.builder(
               itemCount: (revComments.length > 10) ? 10 : revComments.length,
               scrollDirection: Axis.horizontal,
@@ -113,42 +116,56 @@ class _ReviewContainerState extends State<ReviewContainer> {
     );
   }
 
-  Row _header(List<ModelBinhLuanTheoPhong> revComments) {
-    return Row(
-      children: [
-        const Icon(Icons.star_rate_rounded, size: titleFontSize),
-        const SizedBox(width: 4),
-        Text(
-          _avgStar(comments).toStringAsFixed(1),
-          style: const TextStyle(fontSize: titleFontSize, fontWeight: .bold),
-        ),
-        const SizedBox(width: 16),
-        const Text(
-          '-',
-          style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
-        ),
-        const SizedBox(width: 16),
-        Text(
-          '${comments.length.toString()} reviews',
-          style: const TextStyle(fontSize: titleFontSize, fontWeight: .bold),
-        ),
-        const Expanded(child: SizedBox()),
-        if (comments.length > maxCount)
-          TextButton(
-            style: TextButton.styleFrom(padding: .zero),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AllReviews(comments: revComments),
+  Widget _header(List<ModelBinhLuanTheoPhong> revComments) {
+    return (revComments.isEmpty)
+        ? const Text(
+            'This place has no reviews yet!',
+            style: TextStyle(fontSize: titleFontSize),
+          )
+        : Row(
+            children: [
+              const Icon(Icons.star_rate_rounded, size: titleFontSize),
+              const SizedBox(width: 4),
+              Text(
+                _avgStar(comments).toStringAsFixed(1),
+                style: const TextStyle(
+                  fontSize: titleFontSize,
+                  fontWeight: .bold,
                 ),
-              );
-            },
-            child: const Text(
-              'View all',
-              style: TextStyle(color: Colors.black, decoration: .underline),
-            ),
-          ),
-      ],
-    );
+              ),
+              const SizedBox(width: 16),
+              const Text(
+                '-',
+                style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
+              ),
+              const SizedBox(width: 16),
+              Text(
+                '${comments.length.toString()} reviews',
+                style: const TextStyle(
+                  fontSize: titleFontSize,
+                  fontWeight: .bold,
+                ),
+              ),
+              const Expanded(child: SizedBox()),
+              if (comments.length > maxCount)
+                TextButton(
+                  style: TextButton.styleFrom(padding: .zero),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AllReviews(comments: revComments),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'View all',
+                    style: TextStyle(
+                      color: Colors.black,
+                      decoration: .underline,
+                    ),
+                  ),
+                ),
+            ],
+          );
   }
 }

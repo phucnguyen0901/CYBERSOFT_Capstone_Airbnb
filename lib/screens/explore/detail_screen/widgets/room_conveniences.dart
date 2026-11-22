@@ -15,7 +15,7 @@ class RoomConveniences extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           const Text(
-            'What\'s this place offer',
+            'What\'s this place offer?',
             style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
           ),
           const SizedBox(height: 16),
