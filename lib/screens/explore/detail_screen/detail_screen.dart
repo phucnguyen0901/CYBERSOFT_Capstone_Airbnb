@@ -2,6 +2,7 @@ import 'package:airbnb_cybersoft/models/room_model.dart';
 import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/floatting_bottom_bar.dart';
 import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/floatting_top_bar.dart';
 import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/review_container.dart';
+import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/room_bedroom.dart';
 import 'package:airbnb_cybersoft/screens/explore/detail_screen/widgets/room_conveniences.dart';
 import 'package:airbnb_cybersoft/screens/explore/explore_screen/widgets/room_location.dart';
 import 'package:airbnb_cybersoft/utils/divider_widget.dart';
@@ -55,7 +56,7 @@ class DetailScreen extends StatelessWidget {
                 const DividerWidget(),
                 Text(room.moTa),
                 const DividerWidget(),
-                _bedroom(),
+                RoomBedroom(room: room),
                 const DividerWidget(),
                 RoomConveniences(room: room),
                 const DividerWidget(),
@@ -75,40 +76,6 @@ class DetailScreen extends StatelessWidget {
     return Text(
       room.tenPhong,
       style: const TextStyle(fontSize: titleFontSize, fontWeight: .bold),
-    );
-  }
-
-  SizedBox _bedroom() {
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: .start,
-        children: [
-          const Text(
-            'Where you\'ll sleep?',
-            style: TextStyle(fontWeight: .bold, fontSize: titleFontSize),
-          ),
-          const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: secondaryColor,
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              crossAxisAlignment: .start,
-              children: [
-                normalSvgIcon(
-                  assetName: 'assets/icons/detail_room_icon/Bed.svg',
-                ),
-                const SizedBox(height: 4),
-                const Text('Bedroom', style: TextStyle(fontWeight: .bold)),
-                Text('${room.giuong.toString()} standard bed(s)'),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 

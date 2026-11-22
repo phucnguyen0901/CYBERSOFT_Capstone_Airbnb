@@ -48,6 +48,18 @@ class ReservationBottomBar extends StatelessWidget {
                           await activityProvider.booking(reserveInfo);
                           if (!context.mounted) return;
                           Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Booking successful!',
+                                  style: TextStyle(fontWeight: .bold),
+                                ),
+                              ),
+                              duration: Duration(seconds: 3),
+                            ),
+                          );
                         },
                   child: Container(
                     padding: const EdgeInsets.symmetric(

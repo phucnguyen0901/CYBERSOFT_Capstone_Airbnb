@@ -92,7 +92,7 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
                       },
                       icon: Icon(
                         Icons.star_rate_rounded,
-                        color: (index <= saoBinhLuan)
+                        color: (index <= saoBinhLuan - 1)
                             ? Colors.amber
                             : Colors.grey,
                         size: 30,
@@ -142,6 +142,18 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
               await _post(maNguoiDung, _cmtController.text.trim());
               if (!context.mounted) return;
               Navigator.of(context).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Review posted successfully!',
+                      style: TextStyle(fontWeight: .bold),
+                    ),
+                  ),
+                  duration: Duration(seconds: 3),
+                ),
+              );
             },
             child: Text(
               'Post',

@@ -39,7 +39,7 @@ class BottomBar extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (authProvider.isLogin != false) {
+                    if (authProvider.isLogin == true) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ReservationScreen(room: room),

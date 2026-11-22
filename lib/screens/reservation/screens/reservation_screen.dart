@@ -99,7 +99,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
         ),
         const Expanded(child: SizedBox()),
         IconButton.outlined(
-          onPressed: (soLuongKhach <= 1)
+          onPressed: (soLuongKhach == 1)
               ? null
               : () {
                   setState(() {
@@ -145,7 +145,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     );
 
     final int diffDate = endDate.difference(startDate).inDays;
-    final int dateRange = diffDate + 1; //lí do: vì nó chỉ đếm số ngày phía sau, bỏ qua ngày bắt đầu, nó sẽ bằng 0 nếu chọn trùng ngày
+    final int dateRange = diffDate + 1; //lí do: vì nó chỉ đếm số ngày phía sau, bỏ qua ngày bắt đầu, nó sẽ = 0 nếu chọn trùng ngày
 
     return dateRange;
   }
