@@ -144,8 +144,8 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
               Navigator.of(context).pop();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  content: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Review posted successfully!',
                       style: TextStyle(fontWeight: .bold),
@@ -155,7 +155,7 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
                 ),
               );
             },
-            child: Text(
+            child: const Text(
               'Post',
               style: TextStyle(
                 fontSize: 16,
