@@ -127,7 +127,7 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
         children: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text(
+            child: const Text(
               'Close',
               style: TextStyle(
                 fontSize: 16,
