@@ -71,7 +71,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    user = userProvider.user;
+    final user = userProvider.user;
     return Scaffold(
       appBar: _appBar(),
       body: SafeArea(
@@ -81,7 +81,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                _heading(user!),
+                _heading(user),
                 const DividerWidget(),
                 normalSvgIcon(
                   assetName: 'assets/icons/detail_room_icon/Verification.svg',
@@ -139,7 +139,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   style: TextStyle(fontSize: titleFontSize, fontWeight: .bold),
                 ),
                 const SizedBox(height: 16),
-                if (user!.phone != 'string')
+                if (user.phone != 'string')
                   const Row(
                     children: [
                       Icon(Icons.done),
@@ -148,7 +148,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                     ],
                   ),
                 const SizedBox(height: 4),
-                if (user!.email != 'string')
+                if (user.email != 'string')
                   const Row(
                     children: [
                       Icon(Icons.done),
@@ -189,8 +189,6 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
 
   AppBar _appBar() {
     return AppBar(
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.transparent,
       leading: BackButton(),
       actions: [
         TextButton(
@@ -220,8 +218,9 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
       useSafeArea: true,
       context: context,
       builder: (context) {
+        final bottomInset = MediaQuery.viewInsetsOf(context).bottom;
         return Padding(
-          padding: const EdgeInsetsGeometry.all(16),
+          padding: EdgeInsets.only(bottom: bottomInset),
           child: EditBottomSheet(user: user!),
         );
       },

@@ -62,7 +62,13 @@ class _AirbnbAppState extends State<AirbnbApp> {
         textTheme: const TextTheme(bodyMedium: TextStyle(fontSize: 16)),
         appBarTheme: const AppBarThemeData(
           surfaceTintColor: Colors.transparent,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            systemStatusBarContrastEnforced: false,
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: .light,
+            statusBarIconBrightness: .dark,
+          ),
         ),
         iconTheme: const IconThemeData(size: 20),
         scaffoldBackgroundColor: Colors.white,

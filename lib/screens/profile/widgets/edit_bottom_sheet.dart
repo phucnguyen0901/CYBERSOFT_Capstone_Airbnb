@@ -76,50 +76,56 @@ class _EditBottomSheetState extends State<EditBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _header(context),
-        const Divider(),
-        _avatar(),
-        const SizedBox(height: 32),
-        Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              _buildEditTile(
-                label: 'Name',
-                validator: requiredValidator,
-                controller: _nameController,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            _header(context),
+            const Divider(),
+            _avatar(),
+            const SizedBox(height: 32),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  _buildEditTile(
+                    label: 'Name',
+                    validator: requiredValidator,
+                    controller: _nameController,
+                  ),
+                  const SizedBox(height: 16, child: Divider()),
+                  _buildEditTile(
+                    label: 'Email',
+                    controller: _emailController,
+                    validator: (input) => input!.isValidEmail()
+                        ? null
+                        : 'Check your email again!',
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(height: 16, child: Divider()),
+                  _buildEditTile(
+                    label: 'Phone',
+                    validator: requiredValidator,
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                  ),
+                  const SizedBox(height: 16, child: Divider()),
+                  _buildEditTile(
+                    label: 'Birthday',
+                    validator: requiredValidator,
+                    controller: _birthdayController,
+                    keyboardType: TextInputType.datetime,
+                  ),
+                  const SizedBox(height: 16, child: Divider()),
+                  _selectGender(),
+                  const SizedBox(height: 16, child: Divider()),
+                ],
               ),
-              const SizedBox(height: 16, child: Divider()),
-              _buildEditTile(
-                label: 'Email',
-                controller: _emailController,
-                validator: (input) =>
-                    input!.isValidEmail() ? null : 'Check your email again!',
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 16, child: Divider()),
-              _buildEditTile(
-                label: 'Phone',
-                validator: requiredValidator,
-                controller: _phoneController,
-                keyboardType: TextInputType.phone,
-              ),
-              const SizedBox(height: 16, child: Divider()),
-              _buildEditTile(
-                label: 'Birthday',
-                validator: requiredValidator,
-                controller: _birthdayController,
-                keyboardType: TextInputType.datetime,
-              ),
-              const SizedBox(height: 16, child: Divider()),
-              _selectGender(),
-              const SizedBox(height: 16, child: Divider()),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

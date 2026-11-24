@@ -42,77 +42,79 @@ class _WriteCommentScreenState extends State<WriteCommentScreen> {
     final user = context.watch<UserProvider>().user;
     return Scaffold(
       appBar: _appBar(context, user.id!),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            crossAxisAlignment: .start,
-            mainAxisSize: .min,
-            children: [
-              Row(
-                crossAxisAlignment: .center,
-                children: [
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundImage: NetworkImage(user.avatar!),
-                    onBackgroundImageError: (exception, stackTrace) =>
-                        Icon(Icons.image_not_supported),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        Text(
-                          user.name,
-                          style: TextStyle(fontWeight: .bold),
-                          maxLines: 1,
-                          overflow: .ellipsis,
-                        ),
-                      ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              crossAxisAlignment: .start,
+              mainAxisSize: .min,
+              children: [
+                Row(
+                  crossAxisAlignment: .center,
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(user.avatar!),
+                      onBackgroundImageError: (exception, stackTrace) =>
+                          Icon(Icons.image_not_supported),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              Center(
-                child: Row(
-                  mainAxisAlignment: .center,
-                  children: List.generate(5, (index) {
-                    return IconButton(
-                      onPressed: () {
-                        setState(() {
-                          saoBinhLuan = index + 1;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.star_rate_rounded,
-                        color: (index <= saoBinhLuan - 1)
-                            ? Colors.amber
-                            : Colors.grey,
-                        size: 30,
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: .start,
+                        children: [
+                          Text(
+                            user.name,
+                            style: TextStyle(fontWeight: .bold),
+                            maxLines: 1,
+                            overflow: .ellipsis,
+                          ),
+                        ],
                       ),
-                    );
-                  }),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _cmtController,
-                scrollController: ScrollController(),
-                maxLines: 10,
-                maxLength: 300,
-                decoration: InputDecoration(
-                  border: .none,
-                  hintText: 'Leave your comment here...',
+                const SizedBox(height: 16),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: .center,
+                    children: List.generate(5, (index) {
+                      return IconButton(
+                        onPressed: () {
+                          setState(() {
+                            saoBinhLuan = index + 1;
+                          });
+                        },
+                        icon: Icon(
+                          Icons.star_rate_rounded,
+                          color: (index <= saoBinhLuan - 1)
+                              ? Colors.amber
+                              : Colors.grey,
+                          size: 30,
+                        ),
+                      );
+                    }),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _cmtController,
+                  scrollController: ScrollController(),
+                  maxLines: 10,
+                  maxLength: 300,
+                  decoration: InputDecoration(
+                    border: .none,
+                    hintText: 'Leave your comment here...',
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
