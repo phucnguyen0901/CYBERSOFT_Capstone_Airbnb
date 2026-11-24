@@ -8,6 +8,7 @@ import 'package:airbnb_cybersoft/utils/constant.dart';
 import 'package:airbnb_cybersoft/utils/secure_storage.dart';
 import 'package:airbnb_cybersoft/utils/svg_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,8 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+
+  SystemChrome.setEnabledSystemUIMode(.edgeToEdge);
 
   var authProvider = AuthProvider();
   var userProvider = UserProvider();
@@ -53,7 +56,6 @@ class _AirbnbAppState extends State<AirbnbApp> {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
-
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.googleSans().fontFamily,
@@ -64,23 +66,28 @@ class _AirbnbAppState extends State<AirbnbApp> {
         ),
         iconTheme: const IconThemeData(size: 20),
         scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: primaryColor,
+          surface: Colors.white,
+        ),
         bottomSheetTheme: const BottomSheetThemeData(
           backgroundColor: Colors.white,
         ),
       ),
       home: Scaffold(
-        body: IndexedStack(
-          index: _navIndex,
-          children: [
-            ExploreScreen(),
-            Center(),
-            Center(),
-            Center(),
-            authProvider.isLogin
-                ? const ProfileScreen()
-                : const RegisterScreen(),
-          ],
+        body: SafeArea(
+          child: IndexedStack(
+            index: _navIndex,
+            children: [
+              ExploreScreen(),
+              Center(),
+              Center(),
+              Center(),
+              authProvider.isLogin
+                  ? const ProfileScreen()
+                  : const RegisterScreen(),
+            ],
+          ),
         ),
         bottomNavigationBar: _navigationBar(),
       ),
